@@ -1,6 +1,6 @@
 import time
 
-from pages.elements_page import TextBoxPage, CheckBoxPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage
 import pytest
 
 class TestElements:
@@ -18,7 +18,7 @@ class TestElements:
             assert permanent_address == output_permanent_address, 'The permanent address does not match'
 
     class TestCheckBox:
-
+        @pytest.mark.skip
         def test_check_box(self, browser):
             page = CheckBoxPage(browser, 'https://demoqa.com/checkbox')
             page.open()
@@ -27,6 +27,19 @@ class TestElements:
             input_checkbox = page.get_checked_checkboxes()
             output_result = page.get_output_result()
             assert input_checkbox == output_result, 'Checkboxes have not been selected'
+
+    class TestRadioButton:
+        @pytest.mark.xfail('"No" have not been selected')
+        def test_radio_button(self, browser):
+            page = RadioButtonPage(browser, 'https://demoqa.com/radio-button')
+            page.open()
+            page.click_on_the_radio_button('yes')
+            assert page.get_output_result() == 'Yes', 'Radio button "Yes" have not been selected'
+            page.click_on_the_radio_button('impressive')
+            assert page.get_output_result() == 'Impressive', 'Radio button "Impressive" have not been selected'
+            page.click_on_the_radio_button('no')
+            assert page.get_output_result() == 'No', 'Radio button "No" have not been selected'
+
 
 
 

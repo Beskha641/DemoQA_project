@@ -1,8 +1,8 @@
-
 from generator.generator import generated_person
-from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators
+from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonLocators
 from pages.base_page import BasePage
 import random
+
 
 class TextBoxPage(BasePage):
     locators = TextBoxPageLocators()
@@ -29,19 +29,17 @@ class TextBoxPage(BasePage):
 
 
 class CheckBoxPage(BasePage):
-
     locators = CheckBoxPageLocators()
 
     def open_full_list(self):
         self.element_is_visible(self.locators.EXPAND_ALL_BUTTON).click()
 
-
     def click_random_checkbox(self):
         item_list = self.elements_are_visible(self.locators.ITEMS_LIST)
         count = 21
         while count != 0:
-            item = item_list[random.randint(1,15)]
-            if count>0:
+            item = item_list[random.randint(1, 15)]
+            if count > 0:
                 self.go_to_element(item)
                 item.click()
                 count -= 1
@@ -56,8 +54,6 @@ class CheckBoxPage(BasePage):
             data.append(title_item)
         return str(data).replace(' ', '').replace('.doc', '').lower()
 
-
-
     def get_output_result(self):
         result_list = self.elements_are_present(self.locators.OUTPUT_RESULT)
         data = []
@@ -66,4 +62,26 @@ class CheckBoxPage(BasePage):
         return str(data).lower().replace(' ', '')
 
 
+class RadioButtonPage(BasePage):
+    locators = RadioButtonLocators()
+
+    def yes_button_click(self):
+        self.element_is_clickable(self.locators.YES_RADIO_BUTTON).click()
+
+    def no_button_click(self):
+        self.element_is_clickable(self.locators.NO_RADIO_BUTTON).click()
+
+    def impressive_button_click(self):
+        self.element_is_clickable(self.locators.IMPRESSIVE_RADIO_BUTTON).click()
+
+    def get_output_result(self):
+        return self.element_is_visible(self.locators.OUTPUT_RESULT).text
+
+    def click_on_the_radio_button(self, choice):
+        choices = {
+            'yes': self.locators.YES_RADIO_BUTTON,
+            'impressive': self.locators.IMPRESSIVE_RADIO_BUTTON,
+            'no': self.locators.NO_RADIO_BUTTON
+        }
+        radio = self.element_is_visible(choices[choice]).click()
 
