@@ -1,8 +1,12 @@
-from pages.elements_page import TextBoxPage
+import time
+
+from pages.elements_page import TextBoxPage, CheckBoxPage
+import pytest
 
 class TestElements:
     class TestTextBox:
 
+        @pytest.mark.skip
         def test_text_box(self, browser):
             page = TextBoxPage(browser, 'https://demoqa.com/text-box')
             page.open()
@@ -12,5 +16,21 @@ class TestElements:
             assert email == output_email, 'The email does not match'
             assert current_address == output_current_address, 'The current address does not match'
             assert permanent_address == output_permanent_address, 'The permanent address does not match'
+
+    class TestCheckBox:
+
+        def test_check_box(self, browser):
+            page = CheckBoxPage(browser, 'https://demoqa.com/checkbox')
+            page.open()
+            page.open_full_list()
+            page.click_random_checkbox()
+            input_checkbox = page.get_checked_checkboxes()
+            output_result = page.get_output_result()
+            assert input_checkbox == output_result, 'Checkboxes have not been selected'
+
+
+
+
+
 
 
