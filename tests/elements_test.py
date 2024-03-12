@@ -1,7 +1,10 @@
+import random
 import time
+from selenium.webdriver.common.by import By
 
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage
 import pytest
+
 
 class TestElements:
     class TestTextBox:
@@ -29,6 +32,7 @@ class TestElements:
             assert input_checkbox == output_result, 'Checkboxes have not been selected'
 
     class TestRadioButton:
+        @pytest.mark.skip
         @pytest.mark.xfail('"No" have not been selected')
         def test_radio_button(self, browser):
             page = RadioButtonPage(browser, 'https://demoqa.com/radio-button')
@@ -40,10 +44,24 @@ class TestElements:
             page.click_on_the_radio_button('no')
             assert page.get_output_result() == 'No', 'Radio button "No" have not been selected'
 
+    class TestWebTable:
+        @pytest.mark.skip
+        def test_web_table_add_person(self, browser):
+            page = WebTablePage(browser, 'https://demoqa.com/webtables')
+            page.open()
+            new_person = page.add_new_person()
+            added_person = page.check_new_added_person()
+            print(new_person)
+            print(added_person)
+            assert new_person in added_person
+            time.sleep(5)
 
-
-
-
+        def test_web_table_search_person(self, browser):
+            page = WebTablePage(browser, 'https://demoqa.com/webtables')
+            page.open()
+            key_word = page.add_new_person()[random.randint(0, 5)]
+            page.search_some_person(key_word)
+            page.check_search_persons(key_word)
 
 
 

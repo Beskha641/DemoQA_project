@@ -29,3 +29,25 @@ class RadioButtonLocators:
     IMPRESSIVE_RADIO_BUTTON = (By.CSS_SELECTOR, 'label[for="impressiveRadio"]')
     NO_RADIO_BUTTON = (By.CSS_SELECTOR, 'label[for="noRadio"]')
     OUTPUT_RESULT = (By.CSS_SELECTOR, 'span[class="text-success"]')
+
+
+class WebTablesLocators:
+    # add person form
+    ADD_BUTTON = (By.CSS_SELECTOR, 'button[id="addNewRecordButton"]')
+    FIRST_NAME_INPUT = (By.CSS_SELECTOR, 'input[id="firstName"]')
+    LAST_NAME_INPUT = (By.CSS_SELECTOR, 'input[id="lastName"]')
+    EMAIL_INPUT = (By.CSS_SELECTOR, 'input[id="userEmail"]')
+    AGE_INPUT = (By.CSS_SELECTOR, 'input[id="age"]')
+    SALARY_INPUT = (By.CSS_SELECTOR, 'input[id="salary"]')
+    DEPARTMENT_INPUT = (By.CSS_SELECTOR, 'input[id="department"]')
+    SUBMIT_BUTTON = (By.CSS_SELECTOR, 'button[id="submit"]')
+
+    # table
+    SEARCH_INPUT = (By.CSS_SELECTOR, 'input[id="searchBox"]')
+    HEADERS = (By.CSS_SELECTOR, 'div[class="rt-resizable-header-content"]')
+    PREVIOUS_BUTTON = (By.CSS_SELECTOR, 'div[class="-previous"]')
+    NEXT_BUTTON = (By.CSS_SELECTOR, 'div[class="-next"]')
+    EDIT_BUTTONS = (By.CSS_SELECTOR, 'span[class="mr-2"]')
+    FULL_PERSON_LIST = (By.CSS_SELECTOR, 'div[class="rt-tr-group"]')
+    DELETE_BUTTONS = (By.CSS_SELECTOR, 'span[title="Delete"]')
+    ROW_PARENT = (By.XPATH, './/ancestor::div[@class="rt-tr-group"]')
