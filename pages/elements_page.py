@@ -3,6 +3,7 @@ from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLoc
     WebTablesLocators
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
+import time
 import random
 
 
@@ -121,10 +122,9 @@ class WebTablePage(BasePage):
     def search_some_person(self, key_word):
         self.element_is_visible(self.locators.SEARCH_INPUT).send_keys(key_word)
 
-
     def check_search_persons(self, key_word):
         delete_buttons = self.elements_are_present(self.locators.DELETE_BUTTONS)
-        data= []
+        data = []
         count = 0
         for row in delete_buttons:
             count += 1
@@ -132,5 +132,32 @@ class WebTablePage(BasePage):
             assert str(key_word) in row_data, f'"{key_word}" not found in line №{count}'
         return data
 
+    def update_person_info(self):
+        # generate input data
+        person_info = next(generated_person())
+        person_data = [person_info.first_name,
+                       person_info.last_name,
+                       person_info.email,
+                       str(person_info.age),
+                       str(person_info.salary),
+                       person_info.department]
 
+        # click the random edit button
+        edit_buttons = self.elements_are_visible(self.locators.EDIT_BUTTONS)
+        edit_button_choice = random.randint(0, (len(edit_buttons)-1))
+        person_data_before_change = edit_buttons[edit_button_choice].find_element(*self.locators.ROW_PARENT).text.splitlines()
+        edit_buttons[edit_button_choice].click()
 
+        # choice and edit random input field
+        input_fields = self.elements_are_present(self.locators.INPUT_FIELDS)
+        edit_field_choice = random.randint(0, 5)
+        input_fields[edit_field_choice].clear()
+        input_fields[edit_field_choice].send_keys(person_data[edit_field_choice])
+        self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+        edit_buttons = self.elements_are_visible(self.locators.EDIT_BUTTONS)
+
+        # get the data after change
+        person_data_after_change = edit_buttons[edit_button_choice].find_element(*self.locators.ROW_PARENT).text.splitlines()
+
+        # checked changed value in the row
+        assert  person_data[edit_field_choice] in person_data_after_change, 'The changed value does not match the entered value'

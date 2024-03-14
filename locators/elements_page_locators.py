@@ -51,3 +51,6 @@ class WebTablesLocators:
     FULL_PERSON_LIST = (By.CSS_SELECTOR, 'div[class="rt-tr-group"]')
     DELETE_BUTTONS = (By.CSS_SELECTOR, 'span[title="Delete"]')
     ROW_PARENT = (By.XPATH, './/ancestor::div[@class="rt-tr-group"]')
+
+    # edit form
+    INPUT_FIELDS = (By.CSS_SELECTOR, 'div[class="mt-2 row"] input')

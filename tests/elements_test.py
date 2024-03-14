@@ -56,6 +56,7 @@ class TestElements:
             assert new_person in added_person
             time.sleep(5)
 
+        @pytest.mark.skip
         def test_web_table_search_person(self, browser):
             page = WebTablePage(browser, 'https://demoqa.com/webtables')
             page.open()
@@ -63,5 +64,10 @@ class TestElements:
             page.search_some_person(key_word)
             page.check_search_persons(key_word)
 
-
+        def test_edit_row(self, browser):
+            page = WebTablePage(browser, 'https://demoqa.com/webtables')
+            page.open()
+            page = WebTablePage(browser, 'https://demoqa.com/webtables')
+            page.open()
+            page.update_person_info()
 
