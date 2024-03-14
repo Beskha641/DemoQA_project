@@ -67,7 +67,11 @@ class TestElements:
         def test_edit_row(self, browser):
             page = WebTablePage(browser, 'https://demoqa.com/webtables')
             page.open()
-            page = WebTablePage(browser, 'https://demoqa.com/webtables')
-            page.open()
-            page.update_person_info()
-
+            row_number = page.get_random_row_number()
+            person_data_before_change = page.get_row_data(row_number)
+            page.click_on_edit_button(row_number)
+            new_data = page.edit_random_field_and_return_data()
+            person_data_after_change = page.get_row_data(row_number)
+            assert person_data_before_change != person_data_after_change, "The rows haven't changed"
+            assert new_data in person_data_after_change, ('The changed value does not match the '
+                                                          'entered value')

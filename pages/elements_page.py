@@ -92,6 +92,36 @@ class RadioButtonPage(BasePage):
 class WebTablePage(BasePage):
     locators = WebTablesLocators()
 
+    def get_row(self, num=0):
+        edit_buttons = self.elements_are_visible(self.locators.EDIT_BUTTONS)
+        row = edit_buttons[num].find_element(
+            *self.locators.ROW_PARENT)
+        return row
+
+    def get_row_data(self, num=0):
+        return self.get_row(num).text.splitlines()
+
+    def get_list_of_completed_rows(self):
+        return self.elements_are_visible(self.locators.EDIT_BUTTONS)
+
+    def get_random_row_number(self):
+        return random.randint(0, (len(self.get_list_of_completed_rows())-1))
+
+    def edit_random_field_and_return_data(self):
+        person_info = next(generated_person())
+        person_data = [person_info.first_name,
+                       person_info.last_name,
+                       person_info.email,
+                       str(person_info.age),
+                       str(person_info.salary),
+                       person_info.department]
+        input_fields = self.elements_are_present(self.locators.INPUT_FIELDS)
+        edit_field_choice = random.randint(0, (len(input_fields)-1))
+        input_fields[edit_field_choice].clear()
+        input_fields[edit_field_choice].send_keys(person_data[edit_field_choice])
+        self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+        return person_data[edit_field_choice]
+
     def add_new_person(self, count=1):
         while count != 0:
             count -= 1
@@ -132,32 +162,13 @@ class WebTablePage(BasePage):
             assert str(key_word) in row_data, f'"{key_word}" not found in line №{count}'
         return data
 
-    def update_person_info(self):
-        # generate input data
-        person_info = next(generated_person())
-        person_data = [person_info.first_name,
-                       person_info.last_name,
-                       person_info.email,
-                       str(person_info.age),
-                       str(person_info.salary),
-                       person_info.department]
+    def click_on_edit_button(self, num):
+        assert num >= 0, 'Row number must be positive'
+        assert num < len(self.get_list_of_completed_rows()), 'This row is empty'
+        self.get_row(num).find_element(*self.locators.EDIT_BUTTONS).click()
 
-        # click the random edit button
-        edit_buttons = self.elements_are_visible(self.locators.EDIT_BUTTONS)
-        edit_button_choice = random.randint(0, (len(edit_buttons)-1))
-        person_data_before_change = edit_buttons[edit_button_choice].find_element(*self.locators.ROW_PARENT).text.splitlines()
-        edit_buttons[edit_button_choice].click()
+    def click_on_delete_button(self, num):
+        assert num >= 0, 'Row number must be positive'
+        assert num < len(self.get_list_of_completed_rows()), 'This row is empty'
+        self.get_row(num).find_element(*self.locators.DELETE_BUTTONS).click()
 
-        # choice and edit random input field
-        input_fields = self.elements_are_present(self.locators.INPUT_FIELDS)
-        edit_field_choice = random.randint(0, 5)
-        input_fields[edit_field_choice].clear()
-        input_fields[edit_field_choice].send_keys(person_data[edit_field_choice])
-        self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
-        edit_buttons = self.elements_are_visible(self.locators.EDIT_BUTTONS)
-
-        # get the data after change
-        person_data_after_change = edit_buttons[edit_button_choice].find_element(*self.locators.ROW_PARENT).text.splitlines()
-
-        # checked changed value in the row
-        assert  person_data[edit_field_choice] in person_data_after_change, 'The changed value does not match the entered value'
