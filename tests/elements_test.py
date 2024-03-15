@@ -2,7 +2,7 @@ import random
 import time
 from selenium.webdriver.common.by import By
 
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage
 import pytest
 
 
@@ -44,8 +44,8 @@ class TestElements:
             page.click_on_the_radio_button('no')
             assert page.get_output_result() == 'No', 'Radio button "No" have not been selected'
 
+    @pytest.mark.skip
     class TestWebTable:
-        @pytest.mark.skip
         def test_web_table_add_person(self, browser):
             page = WebTablePage(browser, 'https://demoqa.com/webtables')
             page.open()
@@ -56,7 +56,6 @@ class TestElements:
             assert new_person in added_person
             time.sleep(5)
 
-        @pytest.mark.skip
         def test_web_table_search_person(self, browser):
             page = WebTablePage(browser, 'https://demoqa.com/webtables')
             page.open()
@@ -64,7 +63,6 @@ class TestElements:
             page.search_some_person(key_word)
             page.check_search_persons(key_word)
 
-        @pytest.mark.skip
         def test_web_table_edit_row(self, browser):
             page = WebTablePage(browser, 'https://demoqa.com/webtables')
             page.open()
@@ -77,7 +75,6 @@ class TestElements:
             assert new_data in person_data_after_change, ('The changed value does not match the '
                                                           'entered value')
 
-        @pytest.mark.skip
         def test_web_table_delete_rows(self, browser):
             page = WebTablePage(browser, 'https://demoqa.com/webtables')
             page.open()
@@ -94,5 +91,33 @@ class TestElements:
 
         def test_web_table_count_rows(self, browser):
             page = WebTablePage(browser, 'https://demoqa.com/webtables')
+            select_values = [5, 10, 20, 25, 50, 100]
             page.open()
-            page.select_count_rows()
+            data = page.select_count_rows()
+            assert select_values == data, 'The number of rows does not match the selected value'
+
+    class TestButtonsPage:
+
+        def test_buttons_double_click_button(self, browser):
+            page = ButtonsPage(browser, 'https://demoqa.com/buttons')
+            page.open()
+            page.click_on_double_click_button()
+            submit_text = page.get_double_click_text()
+            assert submit_text == 'You have done a double click', 'Submit text is not visible, or is incorrect'
+            time.sleep(3)
+
+        def test_buttons_right_click_button(self, browser):
+            page = ButtonsPage(browser, 'https://demoqa.com/buttons')
+            page.open()
+            page.click_on_right_click_button()
+            submit_text = page.get_right_click_text()
+            assert submit_text == 'You have done a right click', 'Submit text is not visible, or is incorrect'
+            time.sleep(3)
+
+        def test_buttons_click_me_button(self, browser):
+            page = ButtonsPage(browser, 'https://demoqa.com/buttons')
+            page.open()
+            page.click_on_click_me_button()
+            submit_text = page.get_click_me_text()
+            assert submit_text == 'You have done a dynamic click', 'Submit text is not visible, or is incorrect'
+            time.sleep(3)

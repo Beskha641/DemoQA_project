@@ -1,6 +1,6 @@
 from generator.generator import generated_person
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonLocators, \
-    WebTablesLocators
+    WebTablesLocators, ButtonsPageLocators
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
 import time
@@ -195,7 +195,30 @@ class WebTablePage(BasePage):
             select = Select(select_button)
             select.select_by_value(f'{value}')
             data.append(self.check_count_rows())
-        assert select_values == data, 'The number of rows does not match the selected value'
+        return data
 
     def check_count_rows(self):
         return len(self.elements_are_present(self.locators.FULL_PERSON_LIST))
+
+
+class ButtonsPage(BasePage):
+    locators = ButtonsPageLocators()
+
+    def click_on_double_click_button(self):
+        self.action_double_click(self.element_is_visible(self.locators.DOUBLE_CLICK_BUTTON))
+
+    def click_on_right_click_button(self):
+        self.action_right_click(self.element_is_visible(self.locators.RIGHT_CLICK_BUTTON))
+
+    def click_on_click_me_button(self):
+        buttons = self.elements_are_visible(self.locators.ALL_BUTTONS)
+        buttons[-1].click()
+
+    def get_double_click_text(self):
+        return self.element_is_visible(self.locators.DOUBLE_CLICK_TEXT).text
+
+    def get_right_click_text(self):
+        return self.element_is_visible(self.locators.RIGHT_CLICK_TEXT).text
+
+    def get_click_me_text(self):
+        return self.element_is_visible(self.locators.CLICK_ME_TEXT).text

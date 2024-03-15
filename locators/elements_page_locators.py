@@ -55,3 +55,14 @@ class WebTablesLocators:
 
     # edit form
     INPUT_FIELDS = (By.CSS_SELECTOR, 'div[class="mt-2 row"] input')
+
+
+class ButtonsPageLocators:
+    DOUBLE_CLICK_BUTTON = (By.CSS_SELECTOR, 'button[id="doubleClickBtn"]')
+    RIGHT_CLICK_BUTTON = (By.CSS_SELECTOR, 'button[id="rightClickBtn"]')
+    ALL_BUTTONS = (By.CSS_SELECTOR, '.mt-4 .btn-primary')
+
+    # result
+    DOUBLE_CLICK_TEXT = (By.CSS_SELECTOR, 'p[id="doubleClickMessage"]')
+    RIGHT_CLICK_TEXT = (By.CSS_SELECTOR, 'p[id="rightClickMessage"]')
+    CLICK_ME_TEXT = (By.CSS_SELECTOR, 'p[id="dynamicClickMessage"]')
