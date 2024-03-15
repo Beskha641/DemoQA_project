@@ -5,6 +5,7 @@ from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
 import time
 import random
+from selenium.webdriver.support.ui import Select
 
 
 class TextBoxPage(BasePage):
@@ -185,3 +186,16 @@ class WebTablePage(BasePage):
     def row_number_assert(self, num):
         assert num >= 0, 'Row number must be positive'
         assert num < len(self.get_list_of_completed_rows()), 'This row is empty'
+
+    def select_count_rows(self):
+        select_values = [5, 10, 20, 25, 50, 100]
+        data = []
+        for value in select_values:
+            select_button = self.element_is_visible(self.locators.SELECT_COUNT_ROWS)
+            select = Select(select_button)
+            select.select_by_value(f'{value}')
+            data.append(self.check_count_rows())
+        assert select_values == data, 'The number of rows does not match the selected value'
+
+    def check_count_rows(self):
+        return len(self.elements_are_present(self.locators.FULL_PERSON_LIST))

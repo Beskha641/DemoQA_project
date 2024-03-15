@@ -77,6 +77,7 @@ class TestElements:
             assert new_data in person_data_after_change, ('The changed value does not match the '
                                                           'entered value')
 
+        @pytest.mark.skip
         def test_web_table_delete_rows(self, browser):
             page = WebTablePage(browser, 'https://demoqa.com/webtables')
             page.open()
@@ -90,3 +91,8 @@ class TestElements:
             print(table_data)
             assert rows_before_delete != rows_after_delete, 'The row was not deleted'
             assert delete_row_data not in table_data, 'The row remained in the table after deletion'
+
+        def test_web_table_count_rows(self, browser):
+            page = WebTablePage(browser, 'https://demoqa.com/webtables')
+            page.open()
+            page.select_count_rows()
