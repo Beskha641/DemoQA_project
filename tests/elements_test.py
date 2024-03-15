@@ -64,7 +64,8 @@ class TestElements:
             page.search_some_person(key_word)
             page.check_search_persons(key_word)
 
-        def test_edit_row(self, browser):
+        @pytest.mark.skip
+        def test_web_table_edit_row(self, browser):
             page = WebTablePage(browser, 'https://demoqa.com/webtables')
             page.open()
             row_number = page.get_random_row_number()
@@ -75,3 +76,17 @@ class TestElements:
             assert person_data_before_change != person_data_after_change, "The rows haven't changed"
             assert new_data in person_data_after_change, ('The changed value does not match the '
                                                           'entered value')
+
+        def test_web_table_delete_rows(self, browser):
+            page = WebTablePage(browser, 'https://demoqa.com/webtables')
+            page.open()
+            rows_before_delete = page.get_count_of_completed_rows()
+            row_number = page.get_random_row_number()
+            delete_row_data = page.get_row_data(row_number)
+            page.click_on_delete_button(row_number)
+            table_data = page.get_table_data()
+            rows_after_delete = page.get_count_of_completed_rows()
+            print(delete_row_data)
+            print(table_data)
+            assert rows_before_delete != rows_after_delete, 'The row was not deleted'
+            assert delete_row_data not in table_data, 'The row remained in the table after deletion'

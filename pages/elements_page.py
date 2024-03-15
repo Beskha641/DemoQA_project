@@ -93,19 +93,31 @@ class WebTablePage(BasePage):
     locators = WebTablesLocators()
 
     def get_row(self, num=0):
+        self.row_number_assert(num)
         edit_buttons = self.elements_are_visible(self.locators.EDIT_BUTTONS)
         row = edit_buttons[num].find_element(
             *self.locators.ROW_PARENT)
         return row
 
     def get_row_data(self, num=0):
+        self.row_number_assert(num)
         return self.get_row(num).text.splitlines()
 
     def get_list_of_completed_rows(self):
         return self.elements_are_visible(self.locators.EDIT_BUTTONS)
 
+    def get_count_of_completed_rows(self):
+        return len(self.elements_are_visible(self.locators.EDIT_BUTTONS))
+
     def get_random_row_number(self):
-        return random.randint(0, (len(self.get_list_of_completed_rows())-1))
+        return random.randint(0, (len(self.get_list_of_completed_rows()) - 1))
+
+    def get_table_data(self):
+        rows = self.get_count_of_completed_rows()
+        data = []
+        for row in range(rows):
+            data.append(self.get_row_data(row))
+        return data
 
     def edit_random_field_and_return_data(self):
         person_info = next(generated_person())
@@ -116,7 +128,7 @@ class WebTablePage(BasePage):
                        str(person_info.salary),
                        person_info.department]
         input_fields = self.elements_are_present(self.locators.INPUT_FIELDS)
-        edit_field_choice = random.randint(0, (len(input_fields)-1))
+        edit_field_choice = random.randint(0, (len(input_fields) - 1))
         input_fields[edit_field_choice].clear()
         input_fields[edit_field_choice].send_keys(person_data[edit_field_choice])
         self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
@@ -163,12 +175,13 @@ class WebTablePage(BasePage):
         return data
 
     def click_on_edit_button(self, num):
-        assert num >= 0, 'Row number must be positive'
-        assert num < len(self.get_list_of_completed_rows()), 'This row is empty'
+        self.row_number_assert(num)
         self.get_row(num).find_element(*self.locators.EDIT_BUTTONS).click()
 
     def click_on_delete_button(self, num):
-        assert num >= 0, 'Row number must be positive'
-        assert num < len(self.get_list_of_completed_rows()), 'This row is empty'
+        self.row_number_assert(num)
         self.get_row(num).find_element(*self.locators.DELETE_BUTTONS).click()
 
+    def row_number_assert(self, num):
+        assert num >= 0, 'Row number must be positive'
+        assert num < len(self.get_list_of_completed_rows()), 'This row is empty'
