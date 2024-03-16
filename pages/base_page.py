@@ -42,3 +42,8 @@ class BasePage:
         action = ActionChains(self.browser)
         action.context_click(element)
         action.perform()
+
+    def switch_to_new_window(self, browser, num=1):
+        assert num <= len(self.browser.window_handles), 'There is no window with this index'
+        self.browser.switch_to.window(self.browser.window_handles[num])
+

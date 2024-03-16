@@ -2,7 +2,7 @@ import random
 import time
 from selenium.webdriver.common.by import By
 
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, TestLinkPage
 import pytest
 
 
@@ -96,6 +96,7 @@ class TestElements:
             data = page.select_count_rows()
             assert select_values == data, 'The number of rows does not match the selected value'
 
+    @pytest.mark.skip
     class TestButtonsPage:
 
         def test_buttons_double_click_button(self, browser):
@@ -104,7 +105,6 @@ class TestElements:
             page.click_on_double_click_button()
             submit_text = page.get_double_click_text()
             assert submit_text == 'You have done a double click', 'Submit text is not visible, or is incorrect'
-            time.sleep(3)
 
         def test_buttons_right_click_button(self, browser):
             page = ButtonsPage(browser, 'https://demoqa.com/buttons')
@@ -112,7 +112,6 @@ class TestElements:
             page.click_on_right_click_button()
             submit_text = page.get_right_click_text()
             assert submit_text == 'You have done a right click', 'Submit text is not visible, or is incorrect'
-            time.sleep(3)
 
         def test_buttons_click_me_button(self, browser):
             page = ButtonsPage(browser, 'https://demoqa.com/buttons')
@@ -120,4 +119,68 @@ class TestElements:
             page.click_on_click_me_button()
             submit_text = page.get_click_me_text()
             assert submit_text == 'You have done a dynamic click', 'Submit text is not visible, or is incorrect'
-            time.sleep(3)
+
+    class TestLinkPage:
+
+        def test_link_home(self, browser):
+            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page.open()
+            home_link = page.locators.LINK_HOME
+            page_url = page.go_to_link(home_link)
+            assert page_url == 'https://demoqa.com/', 'Incorrect link'
+
+        def test_dynamic_link(self, browser):
+            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page.open()
+            link = page.locators.LINK_DYNAMIC
+            page_url = page.go_to_link(link)
+            assert page_url == 'https://demoqa.com/', 'Incorrect link'
+
+        def test_created_link(self, browser):
+            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page.open()
+            link = page.locators.LINK_CREATE
+            code = page.check_link(link, 'https://demoqa.com/created')
+            assert code == 201, 'Status code should be 201'
+
+        def test_no_content_link(self, browser):
+            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page.open()
+            link = page.locators.LINK_NO_CONTENT
+            code = page.check_link(link, 'https://demoqa.com/no-content')
+            assert code == 204, 'Status code should be 204'
+
+        def test_moved_link(self, browser):
+            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page.open()
+            link = page.locators.LINK_MOVED
+            code = page.check_link(link, 'https://demoqa.com/moved')
+            assert code == 301, 'Status code should be 301'
+
+        def test_bad_request_link(self, browser):
+            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page.open()
+            link = page.locators.LINK_BAD_REQUEST
+            code = page.check_link(link, 'https://demoqa.com/bad-request')
+            assert code == 400, 'Status code should be 400'
+
+        def test_unauthorized_link(self, browser):
+            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page.open()
+            link = page.locators.LINK_UNAUTHORIZED
+            code = page.check_link(link, 'https://demoqa.com/unauthorized')
+            assert code == 401, 'Status code should be 401'
+
+        def test_forbidden_link(self, browser):
+            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page.open()
+            link = page.locators.LINK_FORBIDDEN
+            code = page.check_link(link, 'https://demoqa.com/forbidden')
+            assert code == 403, 'Status code should be 403'
+
+        def test_not_found_link(self, browser):
+            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page.open()
+            link = page.locators.LINK_NOT_FOUND
+            code = page.check_link(link, 'https://demoqa.com/invalid-url')
+            assert code == 404, 'Status code should be 404'

@@ -66,3 +66,17 @@ class ButtonsPageLocators:
     DOUBLE_CLICK_TEXT = (By.CSS_SELECTOR, 'p[id="doubleClickMessage"]')
     RIGHT_CLICK_TEXT = (By.CSS_SELECTOR, 'p[id="rightClickMessage"]')
     CLICK_ME_TEXT = (By.CSS_SELECTOR, 'p[id="dynamicClickMessage"]')
+
+
+class TestLinkPageLocators:
+    LINK_HOME = (By.CSS_SELECTOR, 'a[id="simpleLink"]')
+    LINK_DYNAMIC = (By.CSS_SELECTOR, 'a[id="dynamicLink"]')
+    LINK_CREATE = (By.CSS_SELECTOR, 'a[id="dynamicLink"]')
+    LINK_NO_CONTENT = (By.CSS_SELECTOR, 'a[id="no-content"]')
+    LINK_MOVED = (By.CSS_SELECTOR, 'a[id="moved"]')
+    LINK_BAD_REQUEST = (By.CSS_SELECTOR, 'a[id="bad-request"]')
+    LINK_UNAUTHORIZED = (By.CSS_SELECTOR, 'a[id="unauthorized"]')
+    LINK_FORBIDDEN = (By.CSS_SELECTOR, 'a[id="forbidden"]')
+    LINK_NOT_FOUND = (By.CSS_SELECTOR, 'a[id="invalid-url"]')
+    LINK_RESPONSE_TEXT = (By.CSS_SELECTOR, 'p[id="linkResponse"]')
+

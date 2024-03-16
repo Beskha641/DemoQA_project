@@ -1,11 +1,12 @@
+import random
+import requests
+
+from selenium.webdriver.support.ui import Select
+
 from generator.generator import generated_person
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonLocators, \
-    WebTablesLocators, ButtonsPageLocators
+    WebTablesLocators, ButtonsPageLocators, TestLinkPageLocators
 from pages.base_page import BasePage
-from selenium.webdriver.common.by import By
-import time
-import random
-from selenium.webdriver.support.ui import Select
 
 
 class TextBoxPage(BasePage):
@@ -222,3 +223,22 @@ class ButtonsPage(BasePage):
 
     def get_click_me_text(self):
         return self.element_is_visible(self.locators.CLICK_ME_TEXT).text
+
+
+class TestLinkPage(BasePage):
+    locators = TestLinkPageLocators()
+
+    def get_link_url(self, link):
+        return self.element_is_visible(link).get_attribute('href')
+
+    def check_link(self, link, url=''):
+        request = requests.get(url)
+        if request.status_code == 200:
+            self.element_is_visible(link)
+        else:
+            return request.status_code
+
+    def go_to_link(self, link):
+        self.element_is_visible(link).click()
+        self.switch_to_new_window('-1')
+        return self.browser.current_url
