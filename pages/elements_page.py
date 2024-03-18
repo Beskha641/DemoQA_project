@@ -5,7 +5,8 @@ from selenium.webdriver.support.ui import Select
 
 from generator.generator import generated_person
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonLocators, \
-    WebTablesLocators, ButtonsPageLocators, TestLinkPageLocators
+    WebTablesLocators, ButtonsPageLocators, TestLinkPageLocators, BrokenLinksAndImagesPageLocators, \
+    UploadAndDownloadPageLocators
 from pages.base_page import BasePage
 
 
@@ -225,7 +226,7 @@ class ButtonsPage(BasePage):
         return self.element_is_visible(self.locators.CLICK_ME_TEXT).text
 
 
-class TestLinkPage(BasePage):
+class LinkPage(BasePage):
     locators = TestLinkPageLocators()
 
     def get_link_url(self, link):
@@ -242,3 +243,32 @@ class TestLinkPage(BasePage):
         self.element_is_visible(link).click()
         self.switch_to_new_window('-1')
         return self.browser.current_url
+
+
+class BrokenLinksAndImagesPage(BasePage):
+    locators = BrokenLinksAndImagesPageLocators()
+
+    def check_link(self, link, url=''):
+        request = requests.get(url)
+        if request.status_code == 200:
+            self.element_is_visible(link).click()
+            return self.browser.current_url
+        else:
+            return request.status_code
+
+    def go_to_link(self, link):
+        self.element_is_visible(link).click()
+        self.switch_to_new_window('-1')
+        return self.browser.current_url
+
+    def get_link_url(self, link):
+        return self.element_is_visible(link).get_attribute('href')
+
+    def check_element_size(self, element):
+        height = self.element_is_visible(element).size.get('height')
+        width = self.element_is_visible(element).size.get('width')
+        return height, width
+
+
+class UploadAndDownloadPage(BasePage):
+    locators = UploadAndDownloadPageLocators()

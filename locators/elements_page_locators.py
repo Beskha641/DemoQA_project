@@ -80,3 +80,14 @@ class TestLinkPageLocators:
     LINK_NOT_FOUND = (By.CSS_SELECTOR, 'a[id="invalid-url"]')
     LINK_RESPONSE_TEXT = (By.CSS_SELECTOR, 'p[id="linkResponse"]')
 
+
+class BrokenLinksAndImagesPageLocators:
+    VALID_IMAGE = (By.CSS_SELECTOR, '.col-md-6 img[src="/images/Toolsqa.jpg"]')
+    BROKEN_IMAGE = (By.CSS_SELECTOR, '.col-md-6 img[src="/images/Toolsqa_1.jpg"]')
+    VALID_LINK = (By.CSS_SELECTOR, 'a[href="http://demoqa.com"]')
+    BROKEN_LINK = (By.CSS_SELECTOR, 'a[href="http://the-internet.herokuapp.com/status_codes/500"]')
+
+
+class UploadAndDownloadPageLocators:
+    DOWNLOAD_BUTTON = (By.CSS_SELECTOR, 'a[id="downloadButton"]')
+    UPLOAD_BUTTON = (By.CSS_SELECTOR, 'input[id="uploadFile"]')

@@ -1,8 +1,8 @@
 import random
 import time
-from selenium.webdriver.common.by import By
 
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, TestLinkPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinkPage, \
+    BrokenLinksAndImagesPage
 import pytest
 
 
@@ -33,7 +33,7 @@ class TestElements:
 
     class TestRadioButton:
         @pytest.mark.skip
-        @pytest.mark.xfail('"No" have not been selected')
+        @pytest.mark.xfail(reason='"No" have not been selected')
         def test_radio_button(self, browser):
             page = RadioButtonPage(browser, 'https://demoqa.com/radio-button')
             page.open()
@@ -120,67 +120,108 @@ class TestElements:
             submit_text = page.get_click_me_text()
             assert submit_text == 'You have done a dynamic click', 'Submit text is not visible, or is incorrect'
 
+    @pytest.mark.skip
     class TestLinkPage:
 
         def test_link_home(self, browser):
-            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page = LinkPage(browser, 'https://demoqa.com/links')
             page.open()
             home_link = page.locators.LINK_HOME
             page_url = page.go_to_link(home_link)
             assert page_url == 'https://demoqa.com/', 'Incorrect link'
 
         def test_dynamic_link(self, browser):
-            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page = LinkPage(browser, 'https://demoqa.com/links')
             page.open()
             link = page.locators.LINK_DYNAMIC
             page_url = page.go_to_link(link)
             assert page_url == 'https://demoqa.com/', 'Incorrect link'
 
         def test_created_link(self, browser):
-            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page = LinkPage(browser, 'https://demoqa.com/links')
             page.open()
             link = page.locators.LINK_CREATE
             code = page.check_link(link, 'https://demoqa.com/created')
             assert code == 201, 'Status code should be 201'
 
         def test_no_content_link(self, browser):
-            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page = LinkPage(browser, 'https://demoqa.com/links')
             page.open()
             link = page.locators.LINK_NO_CONTENT
             code = page.check_link(link, 'https://demoqa.com/no-content')
             assert code == 204, 'Status code should be 204'
 
         def test_moved_link(self, browser):
-            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page = LinkPage(browser, 'https://demoqa.com/links')
             page.open()
             link = page.locators.LINK_MOVED
             code = page.check_link(link, 'https://demoqa.com/moved')
             assert code == 301, 'Status code should be 301'
 
         def test_bad_request_link(self, browser):
-            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page = LinkPage(browser, 'https://demoqa.com/links')
             page.open()
             link = page.locators.LINK_BAD_REQUEST
             code = page.check_link(link, 'https://demoqa.com/bad-request')
             assert code == 400, 'Status code should be 400'
 
         def test_unauthorized_link(self, browser):
-            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page = LinkPage(browser, 'https://demoqa.com/links')
             page.open()
             link = page.locators.LINK_UNAUTHORIZED
             code = page.check_link(link, 'https://demoqa.com/unauthorized')
             assert code == 401, 'Status code should be 401'
 
         def test_forbidden_link(self, browser):
-            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page = LinkPage(browser, 'https://demoqa.com/links')
             page.open()
             link = page.locators.LINK_FORBIDDEN
             code = page.check_link(link, 'https://demoqa.com/forbidden')
             assert code == 403, 'Status code should be 403'
 
         def test_not_found_link(self, browser):
-            page = TestLinkPage(browser, 'https://demoqa.com/links')
+            page = LinkPage(browser, 'https://demoqa.com/links')
             page.open()
             link = page.locators.LINK_NOT_FOUND
             code = page.check_link(link, 'https://demoqa.com/invalid-url')
             assert code == 404, 'Status code should be 404'
+
+    @pytest.mark.skip
+    class TestBrokenLinksAndImagesPage:
+
+        def test_valid_image(self, browser):
+            page = BrokenLinksAndImagesPage(browser, 'https://demoqa.com/broken')
+            page.open()
+            img = page.locators.VALID_IMAGE
+            height, width = page.check_element_size(img)
+            assert height == 100 and width == 347, 'The image is not displayed correctly'
+
+        @pytest.mark.xfail(reason='Image is not displayed')
+        def test_broken_image(self, browser):
+            page = BrokenLinksAndImagesPage(browser, 'https://demoqa.com/broken')
+            page.open()
+            img = page.locators.BROKEN_IMAGE
+            height, width = page.check_element_size(img)
+            assert height == 100 and width == 347, 'The image is not displayed correctly'
+
+        @pytest.mark.xfail(reason="The link has http protocol, not https, I think this is a bug")
+        def test_valid_link(self, browser):
+            page = BrokenLinksAndImagesPage(browser, 'https://demoqa.com/broken')
+            page.open()
+            link = page.locators.VALID_LINK
+            page_url = page.get_link_url(link)
+            new_url = page.check_link(link, page_url)
+            assert page_url == new_url, 'Incorrect link'
+
+        def test_broken_link(self, browser):
+            page = BrokenLinksAndImagesPage(browser, 'https://demoqa.com/broken')
+            page.open()
+            link = page.locators.BROKEN_LINK
+            url = page.get_link_url(link)
+            code = page.check_link(link, url)
+            assert code == 500, 'Link response should be 500'
+
+    class TestUploadAndDownloadPage:
+
+        def test_download_button(self, browser):
+            pass
