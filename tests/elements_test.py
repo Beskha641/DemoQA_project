@@ -2,7 +2,7 @@ import random
 import time
 
 from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinkPage, \
-    BrokenLinksAndImagesPage
+    BrokenLinksAndImagesPage, UploadAndDownloadPage
 import pytest
 
 
@@ -222,6 +222,19 @@ class TestElements:
             assert code == 500, 'Link response should be 500'
 
     class TestUploadAndDownloadPage:
+        @pytest.mark.skip
+        def test_upload_button(self, browser):
+            page = UploadAndDownloadPage(browser, 'https://demoqa.com/upload-download')
+            page.open()
+            file_name, upload_message = page.upload_file()
+            assert file_name == upload_message, 'Upload message and file name does not match'
 
         def test_download_button(self, browser):
-            pass
+            page = UploadAndDownloadPage(browser, 'https://demoqa.com/upload-download')
+            page.open()
+            check_file = page.download_file()
+            assert check_file is True, 'The file has not been downloaded'
+
+
+
+

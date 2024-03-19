@@ -91,3 +91,5 @@ class BrokenLinksAndImagesPageLocators:
 class UploadAndDownloadPageLocators:
     DOWNLOAD_BUTTON = (By.CSS_SELECTOR, 'a[id="downloadButton"]')
     UPLOAD_BUTTON = (By.CSS_SELECTOR, 'input[id="uploadFile"]')
+    UPLOADED_RESULT = (By.CSS_SELECTOR, 'p[id="uploadedFilePath"]')
+
