@@ -1,14 +1,17 @@
 import base64
 import os
 import random
+import time
+
 import requests
+from selenium.common import TimeoutException
 
 from selenium.webdriver.support.ui import Select
 
 from generator.generator import generated_person, generated_file
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonLocators, \
     WebTablesLocators, ButtonsPageLocators, TestLinkPageLocators, BrokenLinksAndImagesPageLocators, \
-    UploadAndDownloadPageLocators
+    UploadAndDownloadPageLocators, DynamicPropertiesPageLocators
 from pages.base_page import BasePage
 
 
@@ -282,7 +285,6 @@ class UploadAndDownloadPage(BasePage):
         upload_message = self.element_is_visible(self.locators.UPLOADED_RESULT).text
         return file_name.split('\\')[-1], upload_message.split('\\')[-1]
 
-
     def download_file(self):
         link = self.element_is_present(self.locators.DOWNLOAD_BUTTON).get_attribute('href')
         link_decode = base64.b64decode(link)
@@ -296,6 +298,30 @@ class UploadAndDownloadPage(BasePage):
         return check_file
 
 
+class DynamicPropertiesPage(BasePage):
+    locators = DynamicPropertiesPageLocators()
+
+    def get_text_with_random_id(self):
+        return self.element_is_visible(self.locators.TEXT_WITH_RANDOM_ID).text
+
+    def check_appear_button(self):
+        try:
+            self.element_is_visible(self.locators.INVISIBLE_BUTTON, 6)
+        except TimeoutException:
+            return False
+        return True
+
+    def check_enable_button(self):
+        try:
+            self.element_is_clickable(self.locators.DISABLED_BUTTON, 6)
+        except TimeoutException:
+            return False
+        return True
 
 
-
+    def check_color_change_button(self):
+        color_button = self.element_is_visible(self.locators.COLOR_CHANGE_BUTTON)
+        color_button_before = color_button.value_of_css_property('color')
+        time.sleep(5)
+        color_button_after = color_button.value_of_css_property('color')
+        return color_button_before, color_button_after

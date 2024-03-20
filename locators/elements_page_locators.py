@@ -93,3 +93,10 @@ class UploadAndDownloadPageLocators:
     UPLOAD_BUTTON = (By.CSS_SELECTOR, 'input[id="uploadFile"]')
     UPLOADED_RESULT = (By.CSS_SELECTOR, 'p[id="uploadedFilePath"]')
 
+
+class DynamicPropertiesPageLocators:
+    TEXT_WITH_RANDOM_ID = (By.CSS_SELECTOR, '.col-md-6 p')
+    DISABLED_BUTTON = (By.CSS_SELECTOR, 'button[id="enableAfter"]')
+    COLOR_CHANGE_BUTTON = (By.CSS_SELECTOR, 'button[id="colorChange"]')
+    INVISIBLE_BUTTON = (By.CSS_SELECTOR, 'button[id="visibleAfter"]')
+    HEADER_TEXT = (By.CSS_SELECTOR, 'h1[class="text-center"]')

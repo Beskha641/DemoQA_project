@@ -2,14 +2,13 @@ import random
 import time
 
 from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinkPage, \
-    BrokenLinksAndImagesPage, UploadAndDownloadPage
+    BrokenLinksAndImagesPage, UploadAndDownloadPage, DynamicPropertiesPage
 import pytest
 
 
 class TestElements:
     class TestTextBox:
 
-        @pytest.mark.skip
         def test_text_box(self, browser):
             page = TextBoxPage(browser, 'https://demoqa.com/text-box')
             page.open()
@@ -21,7 +20,7 @@ class TestElements:
             assert permanent_address == output_permanent_address, 'The permanent address does not match'
 
     class TestCheckBox:
-        @pytest.mark.skip
+
         def test_check_box(self, browser):
             page = CheckBoxPage(browser, 'https://demoqa.com/checkbox')
             page.open()
@@ -32,7 +31,7 @@ class TestElements:
             assert input_checkbox == output_result, 'Checkboxes have not been selected'
 
     class TestRadioButton:
-        @pytest.mark.skip
+
         @pytest.mark.xfail(reason='"No" have not been selected')
         def test_radio_button(self, browser):
             page = RadioButtonPage(browser, 'https://demoqa.com/radio-button')
@@ -44,15 +43,12 @@ class TestElements:
             page.click_on_the_radio_button('no')
             assert page.get_output_result() == 'No', 'Radio button "No" have not been selected'
 
-    @pytest.mark.skip
     class TestWebTable:
         def test_web_table_add_person(self, browser):
             page = WebTablePage(browser, 'https://demoqa.com/webtables')
             page.open()
             new_person = page.add_new_person()
             added_person = page.check_new_added_person()
-            print(new_person)
-            print(added_person)
             assert new_person in added_person
             time.sleep(5)
 
@@ -63,6 +59,7 @@ class TestElements:
             page.search_some_person(key_word)
             page.check_search_persons(key_word)
 
+        @pytest.mark.debug
         def test_web_table_edit_row(self, browser):
             page = WebTablePage(browser, 'https://demoqa.com/webtables')
             page.open()
@@ -84,8 +81,6 @@ class TestElements:
             page.click_on_delete_button(row_number)
             table_data = page.get_table_data()
             rows_after_delete = page.get_count_of_completed_rows()
-            print(delete_row_data)
-            print(table_data)
             assert rows_before_delete != rows_after_delete, 'The row was not deleted'
             assert delete_row_data not in table_data, 'The row remained in the table after deletion'
 
@@ -96,7 +91,6 @@ class TestElements:
             data = page.select_count_rows()
             assert select_values == data, 'The number of rows does not match the selected value'
 
-    @pytest.mark.skip
     class TestButtonsPage:
 
         def test_buttons_double_click_button(self, browser):
@@ -120,7 +114,6 @@ class TestElements:
             submit_text = page.get_click_me_text()
             assert submit_text == 'You have done a dynamic click', 'Submit text is not visible, or is incorrect'
 
-    @pytest.mark.skip
     class TestLinkPage:
 
         def test_link_home(self, browser):
@@ -186,7 +179,6 @@ class TestElements:
             code = page.check_link(link, 'https://demoqa.com/invalid-url')
             assert code == 404, 'Status code should be 404'
 
-    @pytest.mark.skip
     class TestBrokenLinksAndImagesPage:
 
         def test_valid_image(self, browser):
@@ -222,7 +214,7 @@ class TestElements:
             assert code == 500, 'Link response should be 500'
 
     class TestUploadAndDownloadPage:
-        @pytest.mark.skip
+
         def test_upload_button(self, browser):
             page = UploadAndDownloadPage(browser, 'https://demoqa.com/upload-download')
             page.open()
@@ -235,6 +227,27 @@ class TestElements:
             check_file = page.download_file()
             assert check_file is True, 'The file has not been downloaded'
 
+    class TestDynamicPropertiesPage:
+        def test_text_with_random_id(self, browser):
+            page = DynamicPropertiesPage(browser, 'https://demoqa.com/dynamic-properties')
+            page.open()
+            text = page.get_text_with_random_id()
+            assert text == 'This text has random Id', 'Text not found'
 
+        def test_appear_button(self, browser):
+            page = DynamicPropertiesPage(browser, 'https://demoqa.com/dynamic-properties')
+            page.open()
+            result = page.check_appear_button()
+            assert result is True, "The button didn't appear within 5 seconds"
 
+        def test_enable_button(self, browser):
+            page = DynamicPropertiesPage(browser, 'https://demoqa.com/dynamic-properties')
+            page.open()
+            result = page.check_enable_button()
+            assert result is True, "The button didn't enable within 5 seconds"
 
+        def test_color_change_button(self, browser):
+            page = DynamicPropertiesPage(browser, 'https://demoqa.com/dynamic-properties')
+            page.open()
+            color_before, color_after = page.check_color_change_button()
+            assert color_before != color_after, 'Button color has not changed within 5 seconds'
