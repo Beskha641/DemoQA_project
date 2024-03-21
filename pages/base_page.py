@@ -1,7 +1,6 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 
 
 class BasePage:
@@ -13,6 +12,7 @@ class BasePage:
         self.browser.get(self.url)
 
     def element_is_visible(self, locator, timeout=5):
+        self.go_to_element(self.element_is_present(locator))
         return wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
 
     def elements_are_visible(self, locator, timeout=5):
@@ -43,7 +43,6 @@ class BasePage:
         action.context_click(element)
         action.perform()
 
-    def switch_to_new_window(self, browser, num=1):
+    def switch_to_new_window(self, num=1):
         assert num <= len(self.browser.window_handles), 'There is no window with this index'
         self.browser.switch_to.window(self.browser.window_handles[num])
-
