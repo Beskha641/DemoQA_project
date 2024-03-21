@@ -59,7 +59,6 @@ class TestElements:
             page.search_some_person(key_word)
             page.check_search_persons(key_word)
 
-        @pytest.mark.debug
         def test_web_table_edit_row(self, browser):
             page = WebTablePage(browser, 'https://demoqa.com/webtables')
             page.open()
