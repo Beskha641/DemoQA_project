@@ -28,3 +28,10 @@ class NestedFramesPageLocators:
     TITLE = (By.CSS_SELECTOR, 'h1[class="text-center"]')
     PARENT_FRAME_TEXT = (By.CSS_SELECTOR, 'body')
     CHILD_FRAME_TEXT = (By.CSS_SELECTOR, 'p')
+
+
+class ModalDialogsPageLocators:
+    SMALL_MODAL_BUTTON = (By.CSS_SELECTOR, 'button[id="showSmallModal"]')
+    LARGE_MODAL_BUTTON = (By.CSS_SELECTOR, 'button[id="showLargeModal"]')
+    SMALL_MODAL_TITLE = (By.CSS_SELECTOR, 'div[id="example-modal-sizes-title-sm"]')
+    LARGE_MODAL_TITLE = (By.CSS_SELECTOR, 'div[id="example-modal-sizes-title-lg"]')

@@ -2,7 +2,7 @@ import time
 
 import pytest
 
-from pages.windows_page import BrowserWindowsPage, BrowserAlertsPage, FramePage, NestedFramesPage
+from pages.windows_page import BrowserWindowsPage, BrowserAlertsPage, FramePage, NestedFramesPage, ModalDialogsPage
 
 
 class TestWindowsPage:
@@ -65,16 +65,17 @@ class TestWindowsPage:
             assert random_person in result_text, 'Alert result does not match the sent value'
 
     class TestFramePage:
-        @pytest.mark.parametrize('frame', [0, 1])
-        def test_switch_to_frames_and_go_back(self, browser, frame):
+        @pytest.mark.parametrize('frame, width, height',
+                                 [(0,'500px', '350px'),
+                                  (1, '100px', '100px')])
+        def test_switch_to_frames(self, browser, frame, width, height):
             page = FramePage(browser, 'https://demoqa.com/frames')
             page.open()
+            checked_width, checked_height = page.check_frame_size(frame)
             page.switch_to_frame(frame)
             title_text = page.get_title_text_on_frame()
             assert title_text == 'This is a sample page', 'Switch into frame is not completed'
-            page.switch_to_parent_frame()
-            title_on_frames_page = page.get_title_on_frames_page()
-            assert title_on_frames_page == 'Frames', 'Switch from frame is not completed'
+            assert checked_width == width and checked_height == height, 'Frame sizes does not match'
 
     class TestNestedFramesPage:
 
@@ -90,3 +91,17 @@ class TestWindowsPage:
             page.switch_to_default_content()
             title_text = page.get_title_text()
             assert title_text == 'Nested Frames', 'Switch into page is not completed'
+
+    class TestModalDialogsPage:
+
+        def test_small_modal(self, browser):
+            page = ModalDialogsPage(browser, 'https://demoqa.com/modal-dialogs')
+            page.open()
+            modal_title = page.check_modal_window('Small modal')
+            assert modal_title == 'Small Modal'
+
+        def test_large_modal(self, browser):
+            page = ModalDialogsPage(browser, 'https://demoqa.com/modal-dialogs')
+            page.open()
+            modal_title = page.check_modal_window('Large modal')
+            assert modal_title == 'Large Modal'

@@ -2,7 +2,7 @@ import time
 from generator.generator import generated_person
 
 from locators.windows_page_locators import BrowserWindowsPageLocators, BrowserAlertsPageLocators, FramePageLocators, \
-    NestedFramesPageLocators
+    NestedFramesPageLocators, ModalDialogsPageLocators
 from pages.base_page import BasePage
 
 
@@ -44,6 +44,14 @@ class FramePage(BasePage):
     def get_title_on_frames_page(self):
         return self.element_is_visible(self.locators.TITLE_IN_FRAMES_PAGE).text
 
+    def check_frame_size(self, frame):
+        if frame == 0:
+            width = self.element_is_present(self.locators.LARGE_FRAME).get_attribute('width')
+            height = self.element_is_present(self.locators.LARGE_FRAME).get_attribute('height')
+        else:
+            width = self.element_is_present(self.locators.SMALL_FRAME).get_attribute('width')
+            height = self.element_is_present(self.locators.SMALL_FRAME).get_attribute('height')
+        return width, height
 
 class NestedFramesPage(BasePage):
     locators = NestedFramesPageLocators()
@@ -61,3 +69,15 @@ class NestedFramesPage(BasePage):
 
     def get_title_text(self):
         return self.element_is_present(self.locators.TITLE).text
+
+
+class ModalDialogsPage(BasePage):
+    locators = ModalDialogsPageLocators()
+
+    def check_modal_window(self, button):
+        if button == 'Small modal':
+            self.element_is_clickable(self.locators.SMALL_MODAL_BUTTON).click()
+            return self.element_is_visible(self.locators.SMALL_MODAL_TITLE).text
+        if button == 'Large modal':
+            self.element_is_clickable(self.locators.LARGE_MODAL_BUTTON).click()
+            return self.element_is_visible(self.locators.LARGE_MODAL_TITLE).text
