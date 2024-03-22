@@ -46,3 +46,10 @@ class BasePage:
     def switch_to_new_window(self, num=1):
         assert num <= len(self.browser.window_handles), 'There is no window with this index'
         self.browser.switch_to.window(self.browser.window_handles[num])
+
+    def switch_to_alert(self, timeout=5):
+        wait(self.browser, timeout).until(EC.alert_is_present())
+        return self.browser.switch_to.alert
+
+    def get_alert_text(self, alert):
+        return alert.text
