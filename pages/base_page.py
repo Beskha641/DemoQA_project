@@ -1,6 +1,7 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 
 class BasePage:
@@ -53,3 +54,12 @@ class BasePage:
 
     def get_alert_text(self, alert):
         return alert.text
+
+    def switch_to_frame(self, num=0):
+        return self.browser.switch_to.frame(self.browser.find_elements(By.TAG_NAME, "iframe")[num])
+
+    def switch_to_parent_frame(self):
+        self.browser.switch_to.parent_frame()
+
+    def switch_to_default_content(self):
+        self.browser.switch_to.default_content()
