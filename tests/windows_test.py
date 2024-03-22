@@ -1,7 +1,8 @@
 import time
 
 import pytest
-from pages.windows_page import BrowserWindowsPage, BrowserAlertsPage
+
+from pages.windows_page import BrowserWindowsPage, BrowserAlertsPage, FramePage, NestedFramesPage
 
 
 class TestWindowsPage:
@@ -62,3 +63,30 @@ class TestWindowsPage:
             result_text = page.check_prompt_result()
             print(result_text)
             assert random_person in result_text, 'Alert result does not match the sent value'
+
+    class TestFramePage:
+        @pytest.mark.parametrize('frame', [0, 1])
+        def test_switch_to_frames_and_go_back(self, browser, frame):
+            page = FramePage(browser, 'https://demoqa.com/frames')
+            page.open()
+            page.switch_to_frame(frame)
+            title_text = page.get_title_text_on_frame()
+            assert title_text == 'This is a sample page', 'Switch into frame is not completed'
+            page.switch_to_parent_frame()
+            title_on_frames_page = page.get_title_on_frames_page()
+            assert title_on_frames_page == 'Frames', 'Switch from frame is not completed'
+
+    class TestNestedFramesPage:
+
+        def test_nested_frames(self, browser):
+            page = NestedFramesPage(browser, 'https://demoqa.com/nestedframes')
+            page.open()
+            page.switch_to_frame()
+            parent_frame_text = page.get_text_in_parent_frame()
+            assert parent_frame_text == 'Parent frame', 'Switch into parent frame is not completed'
+            page.switch_to_child_frame()
+            child_frame_text = page.get_text_in_child_frame()
+            assert child_frame_text == 'Child Iframe', 'Switch into child frame is not completed'
+            page.switch_to_default_content()
+            title_text = page.get_title_text()
+            assert title_text == 'Nested Frames', 'Switch into page is not completed'

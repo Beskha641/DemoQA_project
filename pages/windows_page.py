@@ -1,7 +1,8 @@
 import time
 from generator.generator import generated_person
 
-from locators.windows_page_locators import BrowserWindowsPageLocators, BrowserAlertsPageLocators
+from locators.windows_page_locators import BrowserWindowsPageLocators, BrowserAlertsPageLocators, FramePageLocators, \
+    NestedFramesPageLocators
 from pages.base_page import BasePage
 
 
@@ -30,7 +31,33 @@ class BrowserAlertsPage(BasePage):
     def check_prompt_result(self):
         return self.element_is_visible(self.locators.PROMPT_ALERT_RESULT).text
 
-
     def check_confirm_result(self):
         return self.element_is_visible(self.locators.CONFIRM_ALERT_RESULT).text
 
+
+class FramePage(BasePage):
+    locators = FramePageLocators()
+
+    def get_title_text_on_frame(self):
+        return self.element_is_visible(self.locators.TITLE_IN_FRAME).text
+
+    def get_title_on_frames_page(self):
+        return self.element_is_visible(self.locators.TITLE_IN_FRAMES_PAGE).text
+
+
+class NestedFramesPage(BasePage):
+    locators = NestedFramesPageLocators()
+
+    def switch_to_child_frame(self):
+        self.switch_to_default_content()
+        self.switch_to_frame()
+        self.switch_to_frame()
+
+    def get_text_in_parent_frame(self):
+        return self.element_is_present(self.locators.PARENT_FRAME_TEXT).text
+
+    def get_text_in_child_frame(self):
+        return self.element_is_present(self.locators.CHILD_FRAME_TEXT).text
+
+    def get_title_text(self):
+        return self.element_is_present(self.locators.TITLE).text
