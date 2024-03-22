@@ -1,6 +1,7 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 
 class BasePage:
@@ -46,3 +47,19 @@ class BasePage:
     def switch_to_new_window(self, num=1):
         assert num <= len(self.browser.window_handles), 'There is no window with this index'
         self.browser.switch_to.window(self.browser.window_handles[num])
+
+    def switch_to_alert(self, timeout=5):
+        wait(self.browser, timeout).until(EC.alert_is_present())
+        return self.browser.switch_to.alert
+
+    def get_alert_text(self, alert):
+        return alert.text
+
+    def switch_to_frame(self, num=0):
+        return self.browser.switch_to.frame(self.browser.find_elements(By.TAG_NAME, "iframe")[num])
+
+    def switch_to_parent_frame(self):
+        self.browser.switch_to.parent_frame()
+
+    def switch_to_default_content(self):
+        self.browser.switch_to.default_content()
