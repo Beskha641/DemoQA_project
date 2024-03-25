@@ -14,3 +14,6 @@ class Person:
     permanent_address: str = None
     phone_number: int = None
 
+@dataclass
+class Color:
+    color_name: list = None
