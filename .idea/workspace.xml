@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1658e244-9427-43fd-890c-35795b38d106" name="Changes" comment="Добавлен .gitignore файл">
+      <change afterPath="$PROJECT_DIR$/.idea/DemoQA_project.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/locators/widgets_page_locators.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/widgets_page.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/widgets_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/forms_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/forms_test.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Beskha641&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="2be6e855-8c2b-4fbf-b95a-f8506690d71a" />
+        <option name="url" value="https://github.com/Beskha641/DemoQA_project.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2dSH1CSFRme4p1XpPJLTI9NI66R" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python tests.Python tests for elements_test.TestElements.TestButtonsPage.test_buttons_right_click_button.executor": "Run",
+    "Python tests.Python tests for elements_test.TestElements.TestTextBox.test_1.executor": "Run",
+    "Python tests.Python tests for elements_test.TestElements.TestTextBox.test_text_box.executor": "Run",
+    "Python tests.Python tests for test_elements.test.executor": "Run",
+    "Python tests.Python tests for tests.test_elements.test.executor": "Run",
+    "Python tests.pytest for elements_test.TestElements.TestButtonsPage.test_buttons_click_me_button.executor": "Run",
+    "Python tests.pytest for elements_test.TestElements.TestButtonsPage.test_buttons_double_click_button.executor": "Run",
+    "Python tests.pytest for elements_test.TestElements.TestDynamicPropertiesPage.test_appear_button.executor": "Run",
+    "Python tests.pytest for elements_test.TestElements.TestDynamicPropertiesPage.test_button_activated_after_five_seconds.executor": "Run",
+    "Python tests.pytest for elements_test.TestElements.TestDynamicPropertiesPage.test_color_change_button.executor": "Run",
+    "Python tests.pytest for elements_test.TestElements.TestDynamicPropertiesPage.test_enable_button.executor": "Run",
+    "Python tests.pytest for elements_test.TestElements.TestDynamicPropertiesPage.test_text_with_random_id.executor": "Run",
+    "Python tests.pytest for elements_test.TestElements.TestLinkPage.test_dynamic_link.executor": "Run",
+    "Python tests.pytest for elements_test.TestElements.TestLinkPage.test_link_home.executor": "Run",
+    "Python tests.pytest for elements_test.TestElements.TestWebTable.test_web_table_delete_rows.executor": "Run",
+    "Python tests.pytest for elements_test.TestElements.TestWebTable.test_web_table_edit_row.executor": "Run",
+    "Python tests.pytest for forms_test.TestFormsPage.TestPracticeFormPage.test_generator.executor": "Run",
+    "Python tests.pytest for forms_test.TestFormsPage.TestPracticeFormPage.test_practice_form.executor": "Run",
+    "Python tests.pytest for widgets_test.TestWidgetsPage.TestAccordianPage.test_accordian.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestAlertsPage.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestAlertsPage.test_alert_button.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestAlertsPage.test_appear_alert_after_five_seconds_button.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestAlertsPage.test_confirm_alert_button.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestAlertsPage.test_prompt_box_alert_button.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestBrowserWindowsPage.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestBrowserWindowsPage.test_new_tab.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestBrowserWindowsPage.test_windows.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestFramePage.test_abc.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestFramePage.test_switch_to_frames_and_go_back.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestFramePage.test_switch_to_large_frame_and_back.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestModalDialogsPage.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestModalDialogsPage.test_large_modal.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestModalDialogsPage.test_small_modal.executor": "Run",
+    "Python tests.pytest for windows_test.TestWindowsPage.TestNestedFramesPage.test_nested_frames.executor": "Run",
+    "Python.debug.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "widgets__branch",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/User/PycharmProjects/DemoQA_project",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable"
+  }
+}]]></component>
+  <component name="RunManager" selected="Python tests.pytest for widgets_test.TestWidgetsPage.TestAccordianPage.test_accordian">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="DemoQA_project" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12 (DemoQA_project)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Autodetect">
+      <module name="DemoQA_project" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\User\PycharmProjects\DemoQA_project\venv\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.12 (DemoQA_project)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <module name="DemoQA_project" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\User\PycharmProjects\DemoQA_project\venv\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.12 (DemoQA_project)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for elements_test.TestElements.TestWebTable.test_web_table_delete_rows" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="DemoQA_project" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\User\PycharmProjects\DemoQA_project\venv\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.12 (DemoQA_project)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;elements_test.TestElements.TestWebTable.test_web_table_delete_rows&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for elements_test.TestElements.TestWebTable.test_web_table_edit_row" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="DemoQA_project" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;elements_test.TestElements.TestWebTable.test_web_table_edit_row&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for forms_test.TestFormsPage.TestPracticeFormPage.test_generator" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="DemoQA_project" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\User\PycharmProjects\DemoQA_project\venv\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.12 (DemoQA_project)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;forms_test.TestFormsPage.TestPracticeFormPage.test_generator&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for forms_test.TestFormsPage.TestPracticeFormPage.test_practice_form" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="DemoQA_project" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\User\PycharmProjects\DemoQA_project\venv\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.12 (DemoQA_project)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;forms_test.TestFormsPage.TestPracticeFormPage.test_practice_form&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for widgets_test.TestWidgetsPage.TestAccordianPage.test_accordian" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="DemoQA_project" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\User\PycharmProjects\DemoQA_project\venv\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.12 (DemoQA_project)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;widgets_test.TestWidgetsPage.TestAccordianPage.test_accordian&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.pytest for widgets_test.TestWidgetsPage.TestAccordianPage.test_accordian" />
+        <item itemvalue="Python tests.pytest for forms_test.TestFormsPage.TestPracticeFormPage.test_practice_form" />
+        <item itemvalue="Python tests.pytest for forms_test.TestFormsPage.TestPracticeFormPage.test_generator" />
+        <item itemvalue="Python tests.pytest for elements_test.TestElements.TestWebTable.test_web_table_edit_row" />
+        <item itemvalue="Python tests.pytest for elements_test.TestElements.TestWebTable.test_web_table_delete_rows" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-d68999036c7f-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.14475.56" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1658e244-9427-43fd-890c-35795b38d106" name="Changes" comment="" />
+      <created>1709994342247</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1709994342247</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Добавлены файлы base_page.py, conftest.py, requirements.txt">
+      <option name="closed" value="true" />
+      <created>1710084032878</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1710084032878</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Добавлен первый тест">
+      <option name="closed" value="true" />
+      <created>1710084187611</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1710084187611</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Исправлен метод go_to_element">
+      <option name="closed" value="true" />
+      <created>1710180199527</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1710180199527</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Убраны опции браузера игнорирующие ошибки ssl сертификата">
+      <option name="closed" value="true" />
+      <created>1710180264568</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1710180264568</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Добавлен тест для страницы &quot;Check Box&quot;">
+      <option name="closed" value="true" />
+      <created>1710180345011</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1710180345011</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Добавлены тесты для создания нового пользователя, а так-же возможности поиска на странице WebTables">
+      <option name="closed" value="true" />
+      <created>1710274436888</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1710274436888</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Добавлен тест, проверяющий возможность изменять значения полей в добавленных данных">
+      <option name="closed" value="true" />
+      <created>1710433172465</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1710433172465</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Переписал тест возможности редактирования данных в таблице Web table, метод update_person_info разбит на 6 методов">
+      <option name="closed" value="true" />
+      <created>1710442835737</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1710442835737</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Добавлен тест возможности удаления данных">
+      <option name="closed" value="true" />
+      <created>1710509130530</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1710509130530</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Добавлен тест возможности выбора количества строк в таблице">
+      <option name="closed" value="true" />
+      <created>1710511270792</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1710511270792</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Добавлены тесты для страницы Buttons">
+      <option name="closed" value="true" />
+      <created>1710526679754</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1710526679754</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Добавлены тесты ссылок для страницы Links">
+      <option name="closed" value="true" />
+      <created>1710606279610</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1710606279610</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Добавлены тесты ля страницы Upload and Download">
+      <option name="closed" value="true" />
+      <created>1710873874072</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1710873874073</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Добавлены тесты для страницы Dynamic properties">
+      <option name="closed" value="true" />
+      <created>1710949852014</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1710949852014</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Добавлен файл pytest.ini">
+      <option name="closed" value="true" />
+      <created>1710949963549</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1710949963549</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Изменен метод element_is_visible">
+      <option name="closed" value="true" />
+      <created>1711048190132</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1711048190132</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Добавлен телефонный номер">
+      <option name="closed" value="true" />
+      <created>1711048221384</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1711048221384</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Убран маркер дебага для метода test_web_table_edit_row">
+      <option name="closed" value="true" />
+      <created>1711048265108</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1711048265108</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Добавлена генерация номера телефона">
+      <option name="closed" value="true" />
+      <created>1711048293641</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1711048293641</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Добавлены файлы forms_page.py, forms_page_locators.py, forms_test.py, добавлен тест для страницы Practice form">
+      <option name="closed" value="true" />
+      <created>1711048601334</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1711048601334</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Добавлены методы switch_to_alert, get_alert_text">
+      <option name="closed" value="true" />
+      <created>1711123955456</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1711123955456</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Созданы файлы windows_page.py, windows_page_locators.py, windows_test.py.&#10;Добавлены тесты и методы для страниц Browser windows и Alerts">
+      <option name="closed" value="true" />
+      <created>1711124028613</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1711124028613</updated>
+    </task>
+    <task id="LOCAL-00023" summary="добавлены методы switch_to_frame, switch_to_parent_frame">
+      <option name="closed" value="true" />
+      <created>1711138604373</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1711138604373</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Добавлены методы и тесты для страниц Frames и Nested Frames">
+      <option name="closed" value="true" />
+      <created>1711138655869</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1711138655869</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Изменен тест для страницы Frame page&#10;добавлены тесты для страницы Modal Dialogs">
+      <option name="closed" value="true" />
+      <created>1711142564201</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1711142564201</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Добавлен .gitignore файл">
+      <option name="closed" value="true" />
+      <created>1711363091132</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1711363091132</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Добавлен .gitignore файл">
+      <option name="closed" value="true" />
+      <created>1711363399867</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1711363399867</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Добавлен первый тест" />
+    <MESSAGE value="Исправлен метод go_to_element" />
+    <MESSAGE value="Убраны опции браузера игнорирующие ошибки ssl сертификата" />
+    <MESSAGE value="Добавлен тест для страницы &quot;Check Box&quot;" />
+    <MESSAGE value="Добавлены тесты для создания нового пользователя, а так-же возможности поиска на странице WebTables" />
+    <MESSAGE value="Добавлен тест, проверяющий возможность изменять значения полей в добавленных данных" />
+    <MESSAGE value="Переписал тест возможности редактирования данных в таблице Web table, метод update_person_info разбит на 6 методов" />
+    <MESSAGE value="Добавлен тест возможности удаления данных" />
+    <MESSAGE value="Добавлен тест возможности выбора количества строк в таблице" />
+    <MESSAGE value="Добавлены тесты для страницы Buttons" />
+    <MESSAGE value="Добавлены тесты ссылок для страницы Links" />
+    <MESSAGE value="Добавлены тесты ля страницы Upload and Download" />
+    <MESSAGE value="Добавлены тесты для страницы Dynamic properties" />
+    <MESSAGE value="Добавлен файл pytest.ini" />
+    <MESSAGE value="Изменен метод element_is_visible" />
+    <MESSAGE value="Добавлен телефонный номер" />
+    <MESSAGE value="Убран маркер дебага для метода test_web_table_edit_row" />
+    <MESSAGE value="Добавлена генерация номера телефона" />
+    <MESSAGE value="Добавлены файлы forms_page.py, forms_page_locators.py, forms_test.py, добавлен тест для страницы Practice form" />
+    <MESSAGE value="Добавлены методы switch_to_alert, get_alert_text" />
+    <MESSAGE value="Созданы файлы windows_page.py, windows_page_locators.py, windows_test.py.&#10;Добавлены тесты и методы для страниц Browser windows и Alerts" />
+    <MESSAGE value="добавлены методы switch_to_frame, switch_to_parent_frame" />
+    <MESSAGE value="Добавлены методы и тесты для страниц Frames и Nested Frames" />
+    <MESSAGE value="Изменен тест для страницы Frame page&#10;добавлены тесты для страницы Modal Dialogs" />
+    <MESSAGE value="Добавлен .gitignore файл" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлен .gitignore файл" />
+  </component>
+</project>
