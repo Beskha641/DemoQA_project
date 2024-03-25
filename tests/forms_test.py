@@ -3,7 +3,6 @@ import pytest
 import time
 
 
-@pytest.mark.debug
 class TestFormsPage:
     class TestPracticeFormPage:
         def test_practice_form(self, browser):
