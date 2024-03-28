@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
@@ -63,3 +65,7 @@ class BasePage:
 
     def switch_to_default_content(self):
         self.browser.switch_to.default_content()
+
+    def time_format_to_am_pm(self, time_str):
+        time = datetime.strptime(time_str, "%H:%M")
+        return time.strftime("%#I:%M %p")
