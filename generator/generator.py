@@ -4,6 +4,7 @@ from data.data import Person, Color
 from faker import Faker
 
 faker_ru = Faker('ru_RU')
+faker_en = Faker('En')
 Faker.seed()
 
 
@@ -29,7 +30,8 @@ def generated_file():
     file.close()
     return file.name, file_path
 
+
 def generated_color():
     yield Color(
-        color_name =['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Black', 'White', 'Voilet', 'Indigo', 'Magenta', 'Aqua']
+        color_name=['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Black', 'White', 'Voilet', 'Indigo', 'Magenta', 'Aqua']
     )
