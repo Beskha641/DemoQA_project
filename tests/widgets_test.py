@@ -2,7 +2,7 @@ import time
 
 import pytest
 
-from pages.widgets_page import AccordianPage, AutoCompletePage
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage
 
 
 class TestWidgetsPage:
@@ -52,4 +52,21 @@ class TestWidgetsPage:
             sent_value = page.fill_input_single()
             checked_value = page.check_single_input_value()
             assert sent_value == checked_value, 'The sent value do not match filled value'
+
+    class TestDatePickerPage:
+        def test_select_date_input(self, browser):
+            page = DatePickerPage(browser, 'https://demoqa.com/date-picker')
+            page.open()
+            selected_date = page.select_random_date_in_date_picker()
+            date_in_date_picker = page.check_date_in_date_picker()
+            assert selected_date == date_in_date_picker
+
+        @pytest.mark.debug
+        def test_date_and_time_picker(self, browser):
+            page = DatePickerPage(browser, 'https://demoqa.com/date-picker')
+            page.open()
+            input_date = page.select_random_date_and_time()
+            check_date = page.check_date_and_time()
+            assert input_date == check_date
+
 

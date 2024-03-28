@@ -2,9 +2,10 @@ import random
 
 from selenium.common import TimeoutException
 from selenium.webdriver import Keys
+from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_color
-from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators
+from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators
 from pages.base_page import BasePage
 
 
@@ -76,3 +77,51 @@ class AutoCompletePage(BasePage):
     def check_single_input_value(self):
         value = self.element_is_visible(self.locators.SINGLE_INPUT_VALUE).text
         return value
+
+
+class DatePickerPage(BasePage):
+    locators = DatePickerPageLocators()
+
+    def select_random_date_in_date_picker(self):
+        self.element_is_visible(self.locators.DATE_SELECT).click()
+        selected_month = random.randint(0, 11)
+        Select(self.element_is_visible(self.locators.DATE_SELECT_MONTH)).select_by_value(str(selected_month))
+        selected_year = random.randint(1900, 2100)
+        Select(self.element_is_visible(self.locators.DATE_SELECT_YEAR)).select_by_value(str(selected_year))
+        days = self.elements_are_present(self.locators.DATE_SELECT_DAYS_LIST)
+        selected_day = random.randint(0, len(days))
+        days[selected_day].click()
+        return [str("{:02d}".format(selected_month + 1)), str("{:02d}".format(selected_day + 1)), str(selected_year)]
+
+    def check_date_in_date_picker(self):
+        date = self.element_is_present(self.locators.DATE_SELECT).get_attribute('value')
+        return date.split('/')
+
+    def select_random_date_and_time(self):
+        self.element_is_visible(self.locators.DATE_AND_TIME_SELECT).click()
+        self.element_is_visible(self.locators.DATE_AND_TIME_SELECT_MONTH).click()
+        months = self.elements_are_visible(self.locators.DATE_AND_TIME_SELECT_MONTH_LIST)
+        select_month = random.choice(months)
+        selected_month = select_month.text
+        select_month.click()
+        self.element_is_visible(self.locators.DATE_AND_TIME_SELECT_YEAR).click()
+        years = self.elements_are_visible(self.locators.DATE_AND_TIME_SELECT_YEAR_LIST)
+        select_year = years[random.randint(1, 11)]
+        selected_year = select_year.text
+        select_year.click()
+        days = self.elements_are_present(self.locators.DATE_SELECT_DAYS_LIST)
+        select_day = random.choice(days)
+        selected_day = select_day.text
+        select_day.click()
+        time_list = self.elements_are_present(self.locators.DATE_AND_TIME_SELECT_TIME_LIST)
+        select_time = random.choice(time_list)
+        selected_time = select_time.text
+        formatted_time = self.time_format_to_am_pm(selected_time)
+        select_time.click()
+        return f'{selected_month} {selected_day}, {selected_year} {formatted_time}'
+
+    def check_date_and_time(self):
+        return self.element_is_visible(self.locators.DATE_AND_TIME_SELECT).get_attribute('value')
+
+
+
