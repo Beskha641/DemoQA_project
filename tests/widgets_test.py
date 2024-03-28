@@ -3,7 +3,7 @@ import time
 
 import pytest
 
-from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage
 
 
 class TestWidgetsPage:
@@ -88,4 +88,21 @@ class TestWidgetsPage:
             value_after = page.check_progress_bar_value()
             assert value_before < value_after, 'Progress bar has not moved'
 
+    class TestTabsPage:
+        @pytest.mark.xfail(reason="'More' tab is not clicable")
+        def test_tabs(self, browser):
+            page = TabsPage(browser, 'https://demoqa.com/tabs')
+            page.open()
+            page.click_on_tab(page.locators.WHAT_TAB)
+            what_tab_text = page.check_text_visibility(page.locators.WHAT_TAB_TEXT)
+            page.click_on_tab(page.locators.ORIGIN_TAB)
+            origin_tab_text = page.check_text_visibility(page.locators.ORIGIN_TAB_TEXT)
+            page.click_on_tab(page.locators.USE_TAB)
+            use_tab_text = page.check_text_visibility(page.locators.USE_TAB_TEXT)
+            page.click_on_tab(page.locators.MORE_TAB)
+            more_tab_text = page.check_text_visibility(page.locators.MORE_TAB_TEXT)
+            assert len(what_tab_text) > 0
+            assert len(origin_tab_text) > 0
+            assert len(use_tab_text) > 0
+            assert len(more_tab_text) > 0
 

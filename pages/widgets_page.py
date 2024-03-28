@@ -6,7 +6,7 @@ from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_color
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators
 from pages.base_page import BasePage
 
 
@@ -125,9 +125,9 @@ class DatePickerPage(BasePage):
         return self.element_is_visible(self.locators.DATE_AND_TIME_SELECT).get_attribute('value')
 
 
-
 class SliderPage(BasePage):
     locators = SliderPageLocators()
+
     def drag_and_drop_slider(self):
         slider_bar = self.element_is_visible(self.locators.SLIDER_BAR)
         self.drag_and_drop_by_offset(slider_bar, random.randint(-10, 10))
@@ -135,11 +135,21 @@ class SliderPage(BasePage):
     def check_slider_value(self):
         return self.element_is_visible(self.locators.SLIDER_VALUE).get_attribute('value')
 
+
 class ProgressBarPage(BasePage):
     locators = ProgressBarPageLocators()
+
     def click_on_progress_bar_button(self):
         self.element_is_clickable(self.locators.PROGRESS_BAR_BUTTON).click()
 
     def check_progress_bar_value(self):
         return self.element_is_present(self.locators.PROGRESS_BAR).get_attribute('aria-valuenow')
 
+
+class TabsPage(BasePage):
+    locators = TabsPageLocators()
+    def click_on_tab(self, locator):
+        self.element_is_clickable(locator).click()
+
+    def check_text_visibility(self, locator):
+        return self.element_is_visible(locator).text
