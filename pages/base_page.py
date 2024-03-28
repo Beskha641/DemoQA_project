@@ -69,3 +69,9 @@ class BasePage:
     def time_format_to_am_pm(self, time_str):
         time = datetime.strptime(time_str, "%H:%M")
         return time.strftime("%#I:%M %p")
+
+    def drag_and_drop_by_offset(self, element, x_cord=0, y_cord=0):
+        actions = ActionChains(self.browser)
+        actions.drag_and_drop_by_offset(element, x_cord, y_cord)
+        actions.perform()
+
