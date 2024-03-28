@@ -1,8 +1,9 @@
+import random
 import time
 
 import pytest
 
-from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage
 
 
 class TestWidgetsPage:
@@ -17,7 +18,6 @@ class TestWidgetsPage:
             assert first_section_title == 'What is Lorem Ipsum?' and len(first_section_content) > 0
             assert second_section_title == 'Where does it come from?' and len(second_section_content) > 0
             assert third_section_title == 'Why do we use it?' and len(third_section_content) > 0
-
 
     class TestAutoCompletePage:
 
@@ -59,14 +59,33 @@ class TestWidgetsPage:
             page.open()
             selected_date = page.select_random_date_in_date_picker()
             date_in_date_picker = page.check_date_in_date_picker()
-            assert selected_date == date_in_date_picker
+            assert selected_date == date_in_date_picker, 'Date do not changed'
 
-        @pytest.mark.debug
         def test_date_and_time_picker(self, browser):
             page = DatePickerPage(browser, 'https://demoqa.com/date-picker')
             page.open()
             input_date = page.select_random_date_and_time()
             check_date = page.check_date_and_time()
-            assert input_date == check_date
+            assert input_date == check_date, 'Date do not changed'
+
+    class TestSliderPage:
+        def test_slider(self, browser):
+            page = SliderPage(browser, 'https://demoqa.com/slider')
+            page.open()
+            value_before = page.check_slider_value()
+            page.drag_and_drop_slider()
+            value_after = page.check_slider_value()
+            assert value_after != value_before, 'The slider has not been moved'
+
+    class TestProgressBarPage:
+        def test_progress_bar(self, browser):
+            page = ProgressBarPage(browser, 'https://demoqa.com/progress-bar')
+            page.open()
+            value_before = page.check_progress_bar_value()
+            page.click_on_progress_bar_button()
+            time.sleep(random.randint(1, 5))
+            page.click_on_progress_bar_button()
+            value_after = page.check_progress_bar_value()
+            assert value_before < value_after, 'Progress bar has not moved'
 
 
