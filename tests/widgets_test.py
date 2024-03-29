@@ -3,7 +3,8 @@ import time
 
 import pytest
 
-from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage, \
+    ToolTipsPage
 
 
 class TestWidgetsPage:
@@ -105,4 +106,22 @@ class TestWidgetsPage:
             assert len(origin_tab_text) > 0
             assert len(use_tab_text) > 0
             assert len(more_tab_text) > 0
+    class TestToolTipsPage:
+        def test_hover_messages(self, browser):
+            page = ToolTipsPage(browser, 'https://demoqa.com/tool-tips')
+            page.open()
+            hover_button, hover_input_field, first_hover_text, second_hover_text = page.get_elements_with_hover_message()
+            page.move_mouse_to_element(hover_button)
+            button_message = page.check_pop_up_message()
+            assert button_message == 'You hovered over the Button'
+            page.move_mouse_to_element(hover_input_field)
+            input_field_message = page.check_pop_up_message()
+            assert input_field_message == 'You hovered over the text field'
+            page.move_mouse_to_element(first_hover_text)
+            first_text_message = page.check_pop_up_message()
+            assert first_text_message == 'You hovered over the Contrary'
+            page.move_mouse_to_element(second_hover_text)
+            second_text_message = page.check_pop_up_message()
+            assert second_text_message == 'You hovered over the 1.10.32'
+
 

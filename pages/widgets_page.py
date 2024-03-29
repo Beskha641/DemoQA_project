@@ -6,7 +6,7 @@ from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_color
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators
 from pages.base_page import BasePage
 
 
@@ -153,3 +153,14 @@ class TabsPage(BasePage):
 
     def check_text_visibility(self, locator):
         return self.element_is_visible(locator).text
+
+class ToolTipsPage(BasePage):
+    locators = ToolTipsPageLocators()
+    def check_pop_up_message(self):
+        return self.elements_are_visible(self.locators.POP_UP_MESSAGE)[-1].text
+
+    def get_elements_with_hover_message(self):
+        button = self.element_is_visible(self.locators.BUTTON)
+        input_field = self.element_is_visible(self.locators.INPUT_FIELD)
+        text_elements_list = self.elements_are_visible(self.locators.HOVER_TEXT_LIST)
+        return button, input_field, text_elements_list[0], text_elements_list[1]

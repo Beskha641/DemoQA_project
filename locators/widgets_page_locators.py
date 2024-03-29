@@ -56,3 +56,10 @@ class TabsPageLocators:
     ORIGIN_TAB_TEXT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-origin"] p')
     USE_TAB_TEXT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-use"] p')
     MORE_TAB_TEXT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-more"] p')
+
+class ToolTipsPageLocators:
+    POP_UP_MESSAGE = (By.CSS_SELECTOR, 'div[class="tooltip-inner"]')
+    BUTTON = (By.CSS_SELECTOR, 'button[id="toolTipButton"]')
+    INPUT_FIELD = (By.CSS_SELECTOR, 'input[id="toolTipTextField"]')
+    HOVER_TEXT_LIST = (By.CSS_SELECTOR, 'div[id="texToolTopContainer"] a')
+
