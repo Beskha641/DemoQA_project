@@ -1,12 +1,12 @@
 import random
-
+from selenium.webdriver.common.by import By
 from selenium.common import TimeoutException
 from selenium.webdriver import Keys
 from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_color
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators, MenuPageLocators
 from pages.base_page import BasePage
 
 
@@ -148,14 +148,17 @@ class ProgressBarPage(BasePage):
 
 class TabsPage(BasePage):
     locators = TabsPageLocators()
+
     def click_on_tab(self, locator):
         self.element_is_clickable(locator).click()
 
     def check_text_visibility(self, locator):
         return self.element_is_visible(locator).text
 
+
 class ToolTipsPage(BasePage):
     locators = ToolTipsPageLocators()
+
     def check_pop_up_message(self):
         return self.elements_are_visible(self.locators.POP_UP_MESSAGE)[-1].text
 
@@ -164,3 +167,10 @@ class ToolTipsPage(BasePage):
         input_field = self.element_is_visible(self.locators.INPUT_FIELD)
         text_elements_list = self.elements_are_visible(self.locators.HOVER_TEXT_LIST)
         return button, input_field, text_elements_list[0], text_elements_list[1]
+
+
+class MenuPage(BasePage):
+    locators = MenuPageLocators()
+
+    def check_visibility_of_element_by_text(self, text):
+        return self.element_is_visible((By.LINK_TEXT, f'{text}'))

@@ -4,7 +4,7 @@ import time
 import pytest
 
 from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage, \
-    ToolTipsPage
+    ToolTipsPage, MenuPage
 
 
 class TestWidgetsPage:
@@ -106,6 +106,7 @@ class TestWidgetsPage:
             assert len(origin_tab_text) > 0
             assert len(use_tab_text) > 0
             assert len(more_tab_text) > 0
+
     class TestToolTipsPage:
         def test_hover_messages(self, browser):
             page = ToolTipsPage(browser, 'https://demoqa.com/tool-tips')
@@ -124,4 +125,15 @@ class TestWidgetsPage:
             second_text_message = page.check_pop_up_message()
             assert second_text_message == 'You hovered over the 1.10.32'
 
-
+    class TestMenuPage:
+        def test_sub_items(self, browser):
+            page = MenuPage(browser, 'https://demoqa.com/menu#')
+            page.open()
+            main_item_two_menu = page.check_visibility_of_element_by_text('Main Item 2')
+            page.move_mouse_to_element(main_item_two_menu)
+            sub_items_list_menu = page.check_visibility_of_element_by_text('SUB SUB LIST »')
+            page.move_mouse_to_element(sub_items_list_menu)
+            sub_sub_item_one = page.check_visibility_of_element_by_text('Sub Sub Item 1')
+            sub_sub_item_two = page.check_visibility_of_element_by_text('Sub Sub Item 2')
+            assert sub_sub_item_one.text == 'Sub Sub Item 1'
+            assert sub_sub_item_two.text == 'Sub Sub Item 2'

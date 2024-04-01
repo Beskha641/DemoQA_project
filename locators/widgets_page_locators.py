@@ -63,3 +63,7 @@ class ToolTipsPageLocators:
     INPUT_FIELD = (By.CSS_SELECTOR, 'input[id="toolTipTextField"]')
     HOVER_TEXT_LIST = (By.CSS_SELECTOR, 'div[id="texToolTopContainer"] a')
 
+class MenuPageLocators:
+    MAIN_ITEM_TWO = (By.LINK_TEXT, 'Main Item 2')
+    MAIN_ITEM_ONE = (By.LINK_TEXT, 'Main Item 1')
+    MAIN_ITEM_THREE = (By.LINK_TEXT, 'Main Item 3')
