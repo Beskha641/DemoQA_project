@@ -79,3 +79,16 @@ class BasePage:
         actions = ActionChains(self.browser)
         actions.move_to_element(element)
         actions.perform()
+
+    def key_down(self, key):
+        actions = ActionChains(self.browser)
+        actions.key_down(key)
+        actions.perform()
+
+    def key_up(self, key):
+        actions = ActionChains(self.browser)
+        actions.key_up(key)
+        actions.perform()
+
+
+
