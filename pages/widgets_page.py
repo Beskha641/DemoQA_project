@@ -1,12 +1,13 @@
 import random
 from selenium.webdriver.common.by import By
-from selenium.common import TimeoutException
+from selenium.common import TimeoutException, NoSuchElementException
 from selenium.webdriver import Keys
 from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_color
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators, MenuPageLocators
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators, MenuPageLocators, \
+    SelectMenuPageLocators
 from pages.base_page import BasePage
 
 
@@ -174,3 +175,71 @@ class MenuPage(BasePage):
 
     def check_visibility_of_element_by_text(self, text):
         return self.element_is_visible((By.LINK_TEXT, f'{text}'))
+
+
+class SelectMenuPage(BasePage):
+    locators = SelectMenuPageLocators()
+
+    def check_select_value_field(self):
+        return self.element_is_visible(self.locators.SELECT_VALUE_FIELD_SELECTED_VALUE).text
+
+    def check_select_one_field(self):
+        return self.element_is_visible(self.locators.SELECT_ONE_FIELD_SELECTED_VALUE).text
+
+    def select_value_of_old_style_select_menu(self):
+        field = self.element_is_visible(self.locators.OLD_STYLE_SELECT_MENU)
+        select = Select(field)
+        data = ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Black', 'White', 'Voilet', 'Indigo', 'Magenta', 'Aqua']
+        selected_value = random.choice(data)
+        select.select_by_visible_text(selected_value)
+        displayed_value = select.first_selected_option.text
+        return selected_value, displayed_value
+
+    def field_multi_select_drop_down(self):
+        self.element_is_visible(self.locators.MULTI_SELECT_DROP_DOWN_FIELD).click()
+        sent_elements_count = random.randint(2, 4)
+        print(sent_elements_count)
+        sent_elements = []
+        for i in range(sent_elements_count):
+            element = random.choice(self.elements_are_visible(self.locators.MULTI_SELECT_DROP_DOWN_FIELD_OPTIONS))
+            sent_elements.append(element.text)
+            element.click()
+        print(sent_elements)
+
+    def field_react_select(self, select_index=0, options_count=random.randint(1, 4)):
+        react_select_field = self.elements_are_visible(self.locators.REACT_SELECT_FIELD_LIST)[select_index]
+        selected_options_list = []
+        react_select_field.click()
+        for option_count in range(options_count):
+            try:
+                options = self.elements_are_visible(self.locators.REACT_SELECT_OPTIONS, 0)
+            except TimeoutException:
+                react_select_field.click()
+                options = self.elements_are_visible(self.locators.REACT_SELECT_OPTIONS)
+            selected_option = options[random.randint(0, len(options) - 1)]
+            selected_options_list.append(selected_option.text)
+            selected_option.click()
+        return selected_options_list
+
+    def check_multi_select_drop_down_values(self):
+        data = []
+        values = self.elements_are_visible(self.locators.MULTI_SELECT_DROP_DOWN_FIELD_OPTIONS_SELECTED)
+        for value in values:
+            data.append(value.text)
+        return data
+
+
+    def check_standard_multi_select(self):
+        values = self.elements_are_present(self.locators.STANDARD_MULTI_SELECT_VALUES_LIST)
+        colors_before = {}
+        colors_after = {}
+        checked_values = random.sample(values, k=(random.randint(1, 4)))
+        self.key_down(Keys.CONTROL)
+        for value in checked_values:
+            colors_before[f'{value.text}'] = value.value_of_css_property('color')
+            value.click()
+            colors_after[f'{value.text}'] = value.value_of_css_property('color')
+        self.key_up(Keys.CONTROL)
+        return colors_before, colors_after
+
+

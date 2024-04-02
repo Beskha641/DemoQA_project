@@ -57,13 +57,28 @@ class TabsPageLocators:
     USE_TAB_TEXT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-use"] p')
     MORE_TAB_TEXT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-more"] p')
 
+
 class ToolTipsPageLocators:
     POP_UP_MESSAGE = (By.CSS_SELECTOR, 'div[class="tooltip-inner"]')
     BUTTON = (By.CSS_SELECTOR, 'button[id="toolTipButton"]')
     INPUT_FIELD = (By.CSS_SELECTOR, 'input[id="toolTipTextField"]')
     HOVER_TEXT_LIST = (By.CSS_SELECTOR, 'div[id="texToolTopContainer"] a')
 
+
 class MenuPageLocators:
     MAIN_ITEM_TWO = (By.LINK_TEXT, 'Main Item 2')
     MAIN_ITEM_ONE = (By.LINK_TEXT, 'Main Item 1')
     MAIN_ITEM_THREE = (By.LINK_TEXT, 'Main Item 3')
+
+
+class SelectMenuPageLocators:
+    REACT_SELECT_FIELD_LIST = (By.CSS_SELECTOR, '.col-sm-12 [class*="container"] svg')
+    REACT_SELECT_OPTIONS = (By.CSS_SELECTOR, 'div[class*="option"]')
+    SELECT_VALUE_FIELD_SELECTED_VALUE = (By.CSS_SELECTOR, '#withOptGroup [class*="singleValue"]')
+    SELECT_ONE_FIELD_SELECTED_VALUE = (By.CSS_SELECTOR, '#selectOne [class*="singleValue"]')
+    OLD_STYLE_SELECT_MENU = (By.CSS_SELECTOR, 'select[id="oldSelectMenu"]')
+    MULTI_SELECT_DROP_DOWN_FIELD_OPTIONS_SELECTED = (By.CSS_SELECTOR, 'div[class="css-12jo7m5"]')
+    STANDARD_MULTI_SELECT_VALUES_LIST = (By.CSS_SELECTOR, 'select[id="cars"] option')
+
+
+

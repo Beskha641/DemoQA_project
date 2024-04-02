@@ -4,7 +4,7 @@ import time
 import pytest
 
 from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage, \
-    ToolTipsPage, MenuPage
+    ToolTipsPage, MenuPage, SelectMenuPage
 
 
 class TestWidgetsPage:
@@ -111,19 +111,20 @@ class TestWidgetsPage:
         def test_hover_messages(self, browser):
             page = ToolTipsPage(browser, 'https://demoqa.com/tool-tips')
             page.open()
-            hover_button, hover_input_field, first_hover_text, second_hover_text = page.get_elements_with_hover_message()
+            (hover_button, hover_input_field, first_hover_text,
+             second_hover_text) = page.get_elements_with_hover_message()
             page.move_mouse_to_element(hover_button)
             button_message = page.check_pop_up_message()
-            assert button_message == 'You hovered over the Button'
+            assert button_message == 'You hovered over the Button', 'Hover message do not displayed'
             page.move_mouse_to_element(hover_input_field)
             input_field_message = page.check_pop_up_message()
-            assert input_field_message == 'You hovered over the text field'
+            assert input_field_message == 'You hovered over the text field', 'Hover message do not displayed'
             page.move_mouse_to_element(first_hover_text)
             first_text_message = page.check_pop_up_message()
-            assert first_text_message == 'You hovered over the Contrary'
+            assert first_text_message == 'You hovered over the Contrary', 'Hover message do not displayed'
             page.move_mouse_to_element(second_hover_text)
             second_text_message = page.check_pop_up_message()
-            assert second_text_message == 'You hovered over the 1.10.32'
+            assert second_text_message == 'You hovered over the 1.10.32', 'Hover message do not displayed'
 
     class TestMenuPage:
         def test_sub_items(self, browser):
@@ -137,3 +138,39 @@ class TestWidgetsPage:
             sub_sub_item_two = page.check_visibility_of_element_by_text('Sub Sub Item 2')
             assert sub_sub_item_one.text == 'Sub Sub Item 1'
             assert sub_sub_item_two.text == 'Sub Sub Item 2'
+
+    class TestSelectMenuPage:
+        def test_select_value_field(self, browser):
+            page = SelectMenuPage(browser, 'https://demoqa.com/select-menu')
+            page.open()
+            selected_value = page.field_react_select()[-1]
+            displayed_value = page.check_select_value_field()
+            assert selected_value == displayed_value, 'The selected value does not match the displayed value'
+
+        def test_one_value_field(self, browser):
+            page = SelectMenuPage(browser, 'https://demoqa.com/select-menu')
+            page.open()
+            selected_value = page.field_react_select(1)[-1]
+            displayed_value = page.check_select_one_field()
+            assert selected_value == displayed_value, 'The selected value does not match the displayed value'
+
+        def test_old_style_select_menu(self, browser):
+            page = SelectMenuPage(browser, 'https://demoqa.com/select-menu')
+            page.open()
+            selected_value, displayed_value = page.select_value_of_old_style_select_menu()
+            assert selected_value == displayed_value, 'The selected value is not displayed correctly'
+
+        def test_multi_select_drop_down(self, browser):
+            page = SelectMenuPage(browser, 'https://demoqa.com/select-menu')
+            page.open()
+            selected_values = page.field_react_select(2)
+            displayed_values = page.check_multi_select_drop_down_values()
+            assert selected_values == displayed_values, 'The selected value does not match the displayed value'
+
+        def test_standard_multi_select(self, browser):
+            page = SelectMenuPage(browser, 'https://demoqa.com/select-menu')
+            page.open()
+            value_colors_before, value_colors_after = page.check_standard_multi_select()
+            assert value_colors_before.keys() == value_colors_after.keys(), ('The colored values do not match the '
+                                                                             'selected values')
+            assert value_colors_before != value_colors_after, 'Values have not been marked selected'
