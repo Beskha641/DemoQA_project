@@ -1,6 +1,9 @@
 import random
+import time
 
-from locators.interactions_page_locators import SortablePageLocators, SelectablePageLocators
+from selenium.webdriver.common.by import By
+
+from locators.interactions_page_locators import SortablePageLocators, SelectablePageLocators, ResizablePageLocators
 from pages.base_page import BasePage
 
 
@@ -51,5 +54,18 @@ class SelectablePage(BasePage):
             item.click()
         return set(activated_items)
 
+class ResizablePage(BasePage):
+    locators = ResizablePageLocators()
+
+    def check_box_size(self, box):
+        return box.get_attribute('style')
+
+    def resize_box_to_min_size(self, box):
+        box_handle = box.find_element(By.CSS_SELECTOR, 'span')
+        self.drag_and_drop_by_offset(box_handle, -200, -200)
+
+    def resize_box_to_max_size(self, box):
+        box_handle = box.find_element(By.CSS_SELECTOR, 'span')
+        self.drag_and_drop_by_offset(box_handle, 500, 300)
 
 
