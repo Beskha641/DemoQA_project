@@ -75,6 +75,11 @@ class BasePage:
         actions.drag_and_drop_by_offset(element, x_cord, y_cord)
         actions.perform()
 
+    def drag_and_drop_to_element(self, element_what, element_where):
+        actions = ActionChains(self.browser)
+        actions.drag_and_drop(element_what, element_where)
+        actions.perform()
+
     def move_mouse_to_element(self, element):
         actions = ActionChains(self.browser)
         actions.move_to_element(element)
