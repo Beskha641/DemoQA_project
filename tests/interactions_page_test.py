@@ -1,4 +1,6 @@
-from pages.interactions_page import SortablePage
+import time
+
+from pages.interactions_page import SortablePage, SelectablePage
 
 
 class TestInteractionsPage:
@@ -19,3 +21,19 @@ class TestInteractionsPage:
             page.shuffle_items()
             order_after = page.check_visible_items_order()
             assert order_before != order_after, 'Items order has not been changed'
+
+    class TestSelectablePage:
+        def test_list_tab(self, browser):
+            page = SelectablePage(browser, 'https://demoqa.com/selectable')
+            page.open()
+            clicked_items = page.click_on_random_items()
+            active_items = page.check_active_items()
+            assert clicked_items == active_items, 'Active items do not match clicked items'
+
+        def test_grid_tab(self, browser):
+            page = SelectablePage(browser, 'https://demoqa.com/selectable')
+            page.open()
+            page.go_to_grid_tab()
+            clicked_items = page.click_on_random_items()
+            active_items = page.check_active_items()
+            assert clicked_items == active_items, 'Active items do not match clicked items'
