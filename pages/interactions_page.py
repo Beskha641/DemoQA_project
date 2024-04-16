@@ -3,7 +3,8 @@ import time
 
 from selenium.webdriver.common.by import By
 
-from locators.interactions_page_locators import SortablePageLocators, SelectablePageLocators, ResizablePageLocators
+from locators.interactions_page_locators import SortablePageLocators, SelectablePageLocators, ResizablePageLocators, \
+    DroppablePageLocators
 from pages.base_page import BasePage
 
 
@@ -54,6 +55,7 @@ class SelectablePage(BasePage):
             item.click()
         return set(activated_items)
 
+
 class ResizablePage(BasePage):
     locators = ResizablePageLocators()
 
@@ -67,5 +69,40 @@ class ResizablePage(BasePage):
     def resize_box_to_max_size(self, box):
         box_handle = box.find_element(By.CSS_SELECTOR, 'span')
         self.drag_and_drop_by_offset(box_handle, 500, 300)
+
+
+class DroppablePage(BasePage):
+    locators = DroppablePageLocators()
+
+    def get_visible_drop_boxes(self):
+        items = self.elements_are_present(self.locators.DROP_BOXES_LIST)
+        return [item for item in items if item.is_displayed()]
+
+    def get_text_of_visible_drop_boxes(self):
+        visible_drop_boxes = self.get_visible_drop_boxes()
+        data = []
+        for drop_box in visible_drop_boxes:
+            data.append(drop_box.find_element(By.CSS_SELECTOR, 'p').text)
+        return data
+
+    def get_element_location(self, element_locator):
+        return self.element_is_present(element_locator).location
+
+
+    def move_drag_box_to_simple_drop_box(self, drag_box_locator):
+        drop_box = self.get_visible_drop_boxes()[0]
+        self.drag_and_drop_to_element(self.element_is_visible(drag_box_locator), drop_box)
+
+    def go_to_accept_tab(self):
+        self.element_is_visible(self.locators.ACCEPT_TAB).click()
+        self.element_is_visible(self.locators.NOT_ACCEPTABLE_DRAG_BOX)
+
+    def go_to_prevent_propagation_tab(self):
+        self.element_is_visible(self.locators.PREVENT_PROPAGATION_TAB).click()
+        self.element_is_visible(self.locators.OUTER_DROP_BOX_GREEDY)
+
+    def go_to_revert_draggable_tab(self):
+        self.element_is_visible(self.locators.REVERT_DRAGGABLE_TAB).click()
+        self.element_is_visible(self.locators.WILL_REVERT_DROP_BOX)
 
 
