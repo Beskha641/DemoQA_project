@@ -33,6 +33,11 @@ class BasePage:
     def element_is_clickable(self, locator, timeout=5):
         return wait(self.browser, timeout).until(EC.element_to_be_clickable(locator))
 
+    def element_is_stationary(self, locator, timeout=5):
+        element = self.element_is_present(locator)
+        return wait(self.browser, timeout).until(
+            lambda d: element.location == self.browser.find_element(*locator).location)
+
     def go_to_element(self, element):
         self.browser.execute_script("arguments[0].scrollIntoView();", element)
 
