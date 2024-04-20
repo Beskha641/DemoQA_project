@@ -1,3 +1,4 @@
+import random
 from datetime import datetime
 
 from selenium.webdriver import ActionChains
@@ -100,5 +101,32 @@ class BasePage:
         actions.key_up(key)
         actions.perform()
 
+    def get_element_area(self, element):
+        location = element.location
+        size = element.size
+        x1, y1 = location['x'], location['y']
+        x2, y2 = (x1 + size['width'], y1 + size['height'])
+        return [x1, x2, y1, y2]
 
+    def drag_and_drop_by_random_offset(self, element, min, max):
+        actions = ActionChains(self.browser)
+        x_offset = self.generate_random_offset_positive_or_negative(min, max)
+        y_offset = self.generate_random_offset_positive_or_negative(min, max)
+        actions.drag_and_drop_by_offset(element, x_offset, y_offset)
+        actions.perform()
+        return x_offset, y_offset
+
+    def generate_random_offset_positive_or_negative(self, min, max):
+        if random.choice([True, False]):
+            return random.randint(min, max)
+        else:
+            return random.randint(-max, -min)
+
+    def check_element_inside_another_element(self, element_inside, element_outside):
+        inside_element_area = self.get_element_area(element_inside)
+        outside_element_area = self.get_element_area(element_outside)
+        return (outside_element_area[0] < inside_element_area[0] and
+                outside_element_area[1] > inside_element_area[1] and
+                outside_element_area[2] < inside_element_area[2] and
+                outside_element_area[3] > inside_element_area[3])
 
