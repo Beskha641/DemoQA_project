@@ -1,6 +1,6 @@
 import time
 
-from pages.interactions_page import SortablePage, SelectablePage, ResizablePage, DroppablePage
+from pages.interactions_page import SortablePage, SelectablePage, ResizablePage, DroppablePage, DragabblePage
 
 
 class TestInteractionsPage:
@@ -165,3 +165,63 @@ class TestInteractionsPage:
             assert visible_drop_boxes_text_after[3] == 'Dropped!', ('Inner droppable box text should change to '
                                                                     '"Dropped!"')
 
+    class TestDragabblePage:
+        def test_move_simple_drag_box(self, browser):
+            page = DragabblePage(browser, 'https://demoqa.com/dragabble')
+            page.open()
+            drag_box = page.element_is_present(page.locators.SIMPLE_DRAG_BOX)
+            drag_box_location_before = drag_box.location
+            page.drag_and_drop_by_random_offset(drag_box, 1, 100)
+            drag_box_location_after = drag_box.location
+            assert (drag_box_location_before['x'] != drag_box_location_after['x'] and
+                    drag_box_location_before['y'] != drag_box_location_after['y']), \
+                'Drag box do not move correctly'
+
+        def test_only_x_axis_drag_box(self, browser):
+            page = DragabblePage(browser, 'https://demoqa.com/dragabble')
+            page.open()
+            page.go_to_axis_restricted_tab()
+            drag_box = page.element_is_present(page.locators.ONLY_X_DRAG_BOX)
+            drag_box_location_before = drag_box.location
+            page.drag_and_drop_by_random_offset(drag_box, 50, 200)
+            drag_box_location_after = drag_box.location
+            assert drag_box_location_before['x'] != drag_box_location_after['x'], 'Drag box should moved by x axis'
+            assert drag_box_location_before['y'] == drag_box_location_after['y'], 'Drag box should not moved by y axis'
+
+        def test_only_y_axis_drag_box(self, browser):
+            page = DragabblePage(browser, 'https://demoqa.com/dragabble')
+            page.open()
+            page.go_to_axis_restricted_tab()
+            drag_box = page.element_is_present(page.locators.ONLY_Y_DRAG_BOX)
+            drag_box_location_before = drag_box.location
+            page.drag_and_drop_by_random_offset(drag_box, 50, 200)
+            drag_box_location_after = drag_box.location
+            assert drag_box_location_before['x'] == drag_box_location_after['x'], 'Drag box should not moved by x axis'
+            assert drag_box_location_before['y'] != drag_box_location_after['y'], 'Drag box should moved by y axis'
+
+        def test_drag_box_inside_the_container(self, browser):
+            page = DragabblePage(browser, 'https://demoqa.com/dragabble')
+            page.open()
+            page.go_to_container_restricted_tab()
+            drag_box = page.element_is_visible(page.locators.LARGE_CONTAINER_DRAG_BOX)
+            container = page.element_is_visible(page.locators.LARGE_CONTAINER)
+            check_occurrence_before = page.check_element_inside_another_element(drag_box, container)
+            page.drag_and_drop_to_element(drag_box, container)
+            page.drag_and_drop_by_random_offset(drag_box, 200, 300)
+            check_occurrence_after = page.check_element_inside_another_element(drag_box, container)
+            assert check_occurrence_before is True, 'Drag box goes outside the box'
+            assert check_occurrence_after is True, 'Drag box goes outside the box'
+
+        def test_drag_box_inside_the_parent(self, browser):
+            page = DragabblePage(browser, 'https://demoqa.com/dragabble')
+            page.open()
+            page.go_to_container_restricted_tab()
+            drag_box = page.element_is_visible(page.locators.SMALL_CONTAINER_DRAG_BOX)
+            container = page.element_is_visible(page.locators.SMALL_CONTAINER)
+            check_occurrence_before = page.check_element_inside_another_element(drag_box, container)
+            page.drag_and_drop_by_random_offset(drag_box, 250, 300)
+            check_occurrence_after = page.check_element_inside_another_element(drag_box, container)
+            assert check_occurrence_before is True, 'Drag box goes outside the parent'
+            assert check_occurrence_after is True, 'Drag box goes outside the parent'
+
+            

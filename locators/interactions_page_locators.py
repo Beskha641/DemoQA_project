@@ -44,3 +44,21 @@ class DroppablePageLocators:
     ACCEPT_TAB = (By.CSS_SELECTOR, 'a[id="droppableExample-tab-accept"]')
     PREVENT_PROPAGATION_TAB = (By.CSS_SELECTOR, 'a[id="droppableExample-tab-preventPropogation"]')
     REVERT_DRAGGABLE_TAB = (By.CSS_SELECTOR, 'a[id="droppableExample-tab-revertable"]')
+
+
+class DragabblePageLocators:
+    # Drag boxes
+    SIMPLE_DRAG_BOX = (By.CSS_SELECTOR, 'div[id="dragBox"]')
+    ONLY_X_DRAG_BOX = (By.CSS_SELECTOR, 'div[id="restrictedX"]')
+    ONLY_Y_DRAG_BOX = (By.CSS_SELECTOR, 'div[id="restrictedY"]')
+    LARGE_CONTAINER_DRAG_BOX = (By.CSS_SELECTOR, 'div[id="containmentWrapper"]>div[class*="ui-draggable"]')
+    SMALL_CONTAINER_DRAG_BOX = (By.CSS_SELECTOR, 'div[class="draggable ui-widget-content m-3"]>.ui-draggable')
+
+    # Tabs
+    AXIS_RESTRICTED_TAB = (By.CSS_SELECTOR, 'a[id="draggableExample-tab-axisRestriction"]')
+    CONTAINER_RESTRICTED_TAB = (By.CSS_SELECTOR, 'a[id="draggableExample-tab-containerRestriction"]')
+    CURSOR_STYLE_TAB = (By.CSS_SELECTOR, 'a[id="draggableExample-tab-cursorStyle"]')
+
+    # Other
+    LARGE_CONTAINER = (By.CSS_SELECTOR, 'div[id="containmentWrapper"]')
+    SMALL_CONTAINER = (By.CSS_SELECTOR, 'div[class="draggable ui-widget-content m-3"]')

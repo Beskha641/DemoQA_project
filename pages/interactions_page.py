@@ -4,7 +4,7 @@ import time
 from selenium.webdriver.common.by import By
 
 from locators.interactions_page_locators import SortablePageLocators, SelectablePageLocators, ResizablePageLocators, \
-    DroppablePageLocators
+    DroppablePageLocators, DragabblePageLocators
 from pages.base_page import BasePage
 
 
@@ -88,7 +88,6 @@ class DroppablePage(BasePage):
     def get_element_location(self, element_locator):
         return self.element_is_present(element_locator).location
 
-
     def move_drag_box_to_simple_drop_box(self, drag_box_locator):
         drop_box = self.get_visible_drop_boxes()[0]
         self.drag_and_drop_to_element(self.element_is_visible(drag_box_locator), drop_box)
@@ -104,5 +103,21 @@ class DroppablePage(BasePage):
     def go_to_revert_draggable_tab(self):
         self.element_is_visible(self.locators.REVERT_DRAGGABLE_TAB).click()
         self.element_is_visible(self.locators.WILL_REVERT_DROP_BOX)
+
+
+class DragabblePage(BasePage):
+    locators = DragabblePageLocators()
+
+    def go_to_axis_restricted_tab(self):
+        self.element_is_clickable(self.locators.AXIS_RESTRICTED_TAB).click()
+        self.element_is_visible(self.locators.ONLY_X_DRAG_BOX)
+
+    def go_to_container_restricted_tab(self):
+        self.element_is_clickable(self.locators.CONTAINER_RESTRICTED_TAB).click()
+        self.element_is_visible(self.locators.LARGE_CONTAINER_DRAG_BOX)
+
+    def go_to_cursor_style_tab(self):
+        self.element_is_clickable(self.locators.CURSOR_STYLE_TAB).click()
+
 
 
