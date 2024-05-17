@@ -1,10 +1,14 @@
+import allure
+
 from pages.forms_page import PracticeFormPage
 import pytest
 import time
 
-
+@allure.suite('Test Forms Page')
 class TestFormsPage:
+    @allure.feature('Test Practice Form Page')
     class TestPracticeFormPage:
+        @allure.title('Test Student Registration Form')
         def test_practice_form(self, browser):
             page = PracticeFormPage(browser, 'https://demoqa.com/automation-practice-form')
             page.open()

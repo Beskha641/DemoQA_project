@@ -1,6 +1,7 @@
 import random
 from datetime import datetime
 
+import allure
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
@@ -12,11 +13,12 @@ class BasePage:
         self.browser = browser
         self.url = url
 
+    @allure.step('Go to url')
     def open(self):
         self.browser.get(self.url)
 
     def element_is_visible(self, locator, timeout=5):
-        self.go_to_element(self.element_is_present(locator))
+        self.go_to_element(self.element_is_present(locator, timeout))
         return wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
 
     def elements_are_visible(self, locator, timeout=5):
@@ -129,4 +131,3 @@ class BasePage:
                 outside_element_area[1] > inside_element_area[1] and
                 outside_element_area[2] < inside_element_area[2] and
                 outside_element_area[3] > inside_element_area[3])
-

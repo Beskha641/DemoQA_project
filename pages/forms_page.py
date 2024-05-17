@@ -1,5 +1,7 @@
 import os
 import random
+
+import allure
 from selenium.webdriver import Keys
 
 from generator.generator import generated_person, generated_file
@@ -11,38 +13,45 @@ from selenium.webdriver.support.select import Select
 class PracticeFormPage(BasePage):
     locators = PracticeFormPageLocators()
 
+    @allure.step('Form filling')
     def field_all_fields(self):
-        person_info = next(generated_person())
-        first_name = person_info.first_name
-        last_name = person_info.last_name
-        email = person_info.email
-        phone_number = person_info.phone_number
-        current_address = person_info.current_address
-        self.element_is_visible(self.locators.FIRST_NAME_INPUT).send_keys(first_name)
-        self.element_is_visible(self.locators.LAST_NAME_INPUT).send_keys(last_name)
-        self.element_is_visible(self.locators.EMAIL_INPUT).send_keys(email)
-        gender = self.click_random_radiobutton()
-        self.element_is_visible(self.locators.MOBILE_INPUT).send_keys(phone_number)
-        selected_date = self.select_random_date_in_calendar()
-        subject = self.select_random_subject()
-        checked_checkboxes = self.checked_random_checkboxes()
-        file_name, path = generated_file()
-        try:
-            self.element_is_visible(self.locators.FILE_INPUT).send_keys(path)
-        finally:
-            os.remove(path)
-        self.element_is_visible(self.locators.CURRENT_ADDRESS_INPUT).send_keys(current_address)
-        state_and_city = self.select_state_and_city()
-        self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+        with allure.step('Generate data'):
+            person_info = next(generated_person())
+            first_name = person_info.first_name
+            last_name = person_info.last_name
+            email = person_info.email
+            phone_number = person_info.phone_number
+            current_address = person_info.current_address
+        with allure.step('Filling fields'):
+            self.element_is_visible(self.locators.FIRST_NAME_INPUT).send_keys(first_name)
+            self.element_is_visible(self.locators.LAST_NAME_INPUT).send_keys(last_name)
+            self.element_is_visible(self.locators.EMAIL_INPUT).send_keys(email)
+            gender = self.click_random_radiobutton()
+            self.element_is_visible(self.locators.MOBILE_INPUT).send_keys(phone_number)
+            selected_date = self.select_random_date_in_calendar()
+            subject = self.select_random_subject()
+            checked_checkboxes = self.checked_random_checkboxes()
+            self.element_is_visible(self.locators.CURRENT_ADDRESS_INPUT).send_keys(current_address)
+        with allure.step('Generate and send the random file'):
+            file_name, path = generated_file()
+            try:
+                self.element_is_visible(self.locators.FILE_INPUT).send_keys(path)
+            finally:
+                os.remove(path)
+        with allure.step('Select state and city'):
+            state_and_city = self.select_state_and_city()
+            self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
         data = [f'{first_name} {last_name}', email, gender, str(phone_number), selected_date, subject,
                 checked_checkboxes, path.split('\\')[-1], current_address, state_and_city]
         return data
 
+    @allure.step('Click the random radiobutton')
     def click_random_radiobutton(self):
         gender = self.elements_are_visible(self.locators.GENDER_RADIO_BUTTONS)[random.randint(0, 2)]
         gender.click()
         return gender.text
 
+    @allure.step('Checked the random checkboxes')
     def checked_random_checkboxes(self):
         count = 7
         checkboxes = self.elements_are_visible(self.locators.HOBBIES_CHECKBOXES)
@@ -58,6 +67,7 @@ class PracticeFormPage(BasePage):
         data = ', '.join(data)
         return data
 
+    @allure.step('Select the random date in calendar')
     def select_random_date_in_calendar(self):
         input_field = self.element_is_visible(self.locators.DATE_OF_BIRTH_INPUT)
         input_field.click()
@@ -66,13 +76,14 @@ class PracticeFormPage(BasePage):
         Select(self.element_is_visible(self.locators.CALENDAR_MONTH)).select_by_value(selected_month)
         Select(self.element_is_visible(self.locators.CALENDAR_YEAR)).select_by_value(selected_year)
         days = self.elements_are_visible(self.locators.CALENDAR_DAYS)
-        select_day = days[random.randint(0, len(days)-1)]
+        select_day = days[random.randint(0, len(days) - 1)]
         selected_day = "{:02d}".format(int(select_day.text))
         selected_month_and_year = self.element_is_visible(self.locators.SELECTED_MONTH_AND_YEAR).text
         select_day.click()
         selected_date = f'{selected_day} {selected_month_and_year}'
         return selected_date
 
+    @allure.step('Select the random subject')
     def select_random_subject(self):
         subjects = ['Maths', 'Computer Science', 'Commerce', 'Chemistry', 'Economics', 'Physics',
                     'Biology', 'English', 'History', 'Arts']
@@ -81,6 +92,7 @@ class PracticeFormPage(BasePage):
         self.element_is_visible(self.locators.SUBJECTS_INPUT).send_keys(Keys.RETURN)
         return choice
 
+    @allure.step('Select state and city')
     def select_state_and_city(self):
         self.element_is_visible(self.locators.SELECT_STATE_INPUT).click()
         self.element_is_visible(self.locators.SELECT_STATE_OPTION).click()
@@ -89,9 +101,9 @@ class PracticeFormPage(BasePage):
         address_value = self.elements_are_present(self.locators.ADDRESS_VALUES)
         return f'{address_value[0].text} {address_value[1].text}'
 
+    @allure.step('Check the submitted form')
     def check_the_submitted_form(self):
         form_values = self.elements_are_visible(self.locators.SUBMITTED_FORM_VALUES)
         form_values_data = [element.text for element in form_values]
         form_values_data[4] = form_values_data[4].replace(',', ' ')
         return form_values_data
-
